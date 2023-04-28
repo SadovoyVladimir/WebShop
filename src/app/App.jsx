@@ -8,10 +8,10 @@ function App() {
   const elements = useRoutes(routes)
 
   return (
-    <>
+    <div>
       <NavBar />
-      <div className='font-bold mx-8 my-4'>{elements}</div>
-    </>
+      <div className='mx-4 mb-4'>{elements}</div>
+    </div>
   )
 }
 

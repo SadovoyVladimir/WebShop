@@ -15,7 +15,7 @@ export default function NavBar() {
   }
 
   return (
-    <nav className='navbar navbar-expand-lg navbar-dark bg-primary mb-4'>
+    <nav className='navbar navbar-expand-lg navbar-dark bg-primary mb-2'>
       <div className='container-fluid'>
         <NavLink to='/' className='navbar-brand'>
           WebShop
@@ -34,11 +34,11 @@ export default function NavBar() {
 
         <div className='collapse navbar-collapse' id='navbarContent'>
           <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-            <li className='nav-item'>
+            {/* <li className='nav-item'>
               <NavLink to='/' className='nav-link'>
                 Home
               </NavLink>
-            </li>
+            </li> */}
             <li className='nav-item'>
               <NavLink to='/auth/login' className='nav-link'>
                 Login
@@ -49,8 +49,18 @@ export default function NavBar() {
                 Cart
               </NavLink>
             </li>
+            <li className='nav-item'>
+              <NavLink to='/user' className='nav-link'>
+                User
+              </NavLink>
+            </li>
+            <li className='nav-item'>
+              <NavLink to='/user/addition' className='nav-link'>
+                Add product
+              </NavLink>
+            </li>
           </ul>
-          <form className='d-flex'>
+          {/* <form className='d-flex'>
             <input
               className='form-control me-2'
               value={value}
@@ -66,36 +76,9 @@ export default function NavBar() {
             >
               Search
             </button>
-          </form>
+          </form> */}
         </div>
       </div>
     </nav>
-  )
-  return (
-    <>
-      <nav>
-        <h1>
-          <NavLink to='/'>
-            <span>Main</span>
-          </NavLink>
-          <span> | </span>
-          <NavLink to='/auth/login'>
-            <span>Log in</span>
-          </NavLink>
-          <span> | </span>
-          <NavLink to='/cart/user1'>
-            <span>Cart</span>
-          </NavLink>
-          <span> | </span>
-          <NavLink to='/user'>
-            <span>User</span>
-          </NavLink>
-          <span> | </span>
-          <NavLink to='/user/addition'>
-            <span>Add product</span>
-          </NavLink>
-        </h1>
-      </nav>
-    </>
   )
 }
