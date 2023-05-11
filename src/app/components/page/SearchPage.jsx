@@ -1,18 +1,23 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
+import ProductsList from '../ui/productsList'
+import { useSelector } from 'react-redux'
+import { getProducts } from '../../store/productsSlice'
 
 export default function SearchPage() {
-  // const { state } = useLocation()
-  // const { products } = useProducts()
-  // const filteredProducts = products.filter((p) =>
-  //   p.name.toLowerCase().includes(state.toLowerCase())
-  // )
+  const { state } = useLocation()
+  const productsList = useSelector(getProducts())
+  const filteredProducts = productsList?.filter((p) =>
+    p.title?.toLowerCase().includes(state.toLowerCase())
+  )
+
+  if (!productsList) return 'Loading...'
 
   return (
     <div>
       <h2>Search Page</h2>
-      {/* <h1>Search elements:</h1>
-      <ProductsList products={filteredProducts} /> */}
+      <h1>Search elements:</h1>
+      <ProductsList products={filteredProducts} />
       <div>
         <NavLink to='/category/category1'>Category 1</NavLink>
       </div>

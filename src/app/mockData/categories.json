@@ -1,0 +1,58 @@
+[
+  {
+    "id": 1,
+    "name": "Clothes",
+    "image": "https://picsum.photos/640/640?r=200",
+    "creationAt": "2023-05-11T03:13:25.000Z",
+    "updatedAt": "2023-05-11T03:13:25.000Z"
+  },
+  {
+    "id": 2,
+    "name": "Electronics",
+    "image": "https://picsum.photos/640/640?r=8070",
+    "creationAt": "2023-05-11T03:13:25.000Z",
+    "updatedAt": "2023-05-11T03:13:25.000Z"
+  },
+  {
+    "id": 3,
+    "name": "Furniture",
+    "image": "https://picsum.photos/640/640?r=2113",
+    "creationAt": "2023-05-11T03:13:25.000Z",
+    "updatedAt": "2023-05-11T03:13:25.000Z"
+  },
+  {
+    "id": 4,
+    "name": "Shoes",
+    "image": "https://picsum.photos/640/640?r=5494",
+    "creationAt": "2023-05-11T03:13:25.000Z",
+    "updatedAt": "2023-05-11T03:13:25.000Z"
+  },
+  {
+    "id": 5,
+    "name": "AGP",
+    "image": "https://placeimg.com/640/480/any",
+    "creationAt": "2023-05-11T03:13:25.000Z",
+    "updatedAt": "2023-05-11T07:17:15.000Z"
+  },
+  {
+    "id": 6,
+    "name": "New Category",
+    "image": "https://placeimg.com/640/480/any",
+    "creationAt": "2023-05-11T07:15:02.000Z",
+    "updatedAt": "2023-05-11T07:15:02.000Z"
+  },
+  {
+    "id": 7,
+    "name": "New Category",
+    "image": "https://placeimg.com/640/480/any",
+    "creationAt": "2023-05-11T07:15:17.000Z",
+    "updatedAt": "2023-05-11T07:15:17.000Z"
+  },
+  {
+    "id": 11,
+    "name": "daf",
+    "image": "https://fastly.picsum.photos/id/147/640/640.jpg?hmac=z_9q16_99UjrK6GWIJSyZdWZDyI7k5XSF_OMdk7G8CY",
+    "creationAt": "2023-05-11T07:34:38.000Z",
+    "updatedAt": "2023-05-11T07:34:38.000Z"
+  }
+]
