@@ -12,12 +12,12 @@ function App() {
 
   return (
     <>
-      <AppLoader>
-        <div>
-          <NavBar />
+      <div>
+        <NavBar />
+        <AppLoader>
           <div className='mx-4 mb-4'>{elements}</div>
-        </div>
-      </AppLoader>
+        </AppLoader>
+      </div>
       <ToastContainer />
     </>
   )

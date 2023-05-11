@@ -1,16 +1,28 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { getProductById } from '../../store/productsSlice'
+import ProductInfoCard from '../ui/productInfoCard'
+import CartAdditionCard from '../ui/cartAdditionCard'
 
 export default function ProductPage() {
+  const { productId } = useParams()
+  const product = useSelector(getProductById(productId))
+
   return (
-    <div>
-      <h2>Product Page</h2>
-      <div>
-        <NavLink to='/category/category1'>Category 1</NavLink>
+    <div className='container'>
+      <h1 className='text-center mb-4'>{product.title}</h1>
+      <div
+        className='d-flex justify-content-between align-items-stretch'
+        style={{ width: 100 + '%' }}
+      >
+        <div style={{ width: 65 + '%' }}>
+          <ProductInfoCard {...product} />
+        </div>
+        <div style={{ width: 30 + '%' }}>
+          <CartAdditionCard {...product} />
+        </div>
       </div>
-      <NavLink to='/cart/user1'>
-        <span>Cart</span>
-      </NavLink>
     </div>
   )
 }

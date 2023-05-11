@@ -56,7 +56,7 @@ export const getProductById = (productId) => (state) => {
   if (state.products.entities) {
     let product
     for (const prod of state.products.entities) {
-      if (prod.id === productId) {
+      if (prod.id === +productId) {
         product = prod
         break
       }

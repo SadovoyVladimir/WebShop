@@ -57,7 +57,7 @@ export const getCategoryById = (categoryId) => (state) => {
   if (state.categories.entities) {
     let category
     for (const cat of state.categories.entities) {
-      if (cat.id === categoryId) {
+      if (cat.id === +categoryId) {
         category = cat
         break
       }

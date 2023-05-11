@@ -2,21 +2,15 @@ import React from 'react'
 import CategoriesList from '../ui/categoriesList'
 // import useMockData from '../../utils/mockData'
 import { useSelector } from 'react-redux'
-import {
-  getCategories,
-  getCategoriesLoadingStatus
-} from '../../store/categoriesSlice'
+import { getCategories } from '../../store/categoriesSlice'
 
 export default function MainPage() {
   // const { error, initialize, progress, status } = useMockData()
-  const isLoading = useSelector(getCategoriesLoadingStatus())
   const categoriesList = useSelector(getCategories())
 
   // const handleClick = () => {
   // initialize()
   // }
-
-  if (isLoading) return 'Loading...'
 
   // return (
   //   <>
@@ -39,7 +33,6 @@ export default function MainPage() {
     <div>
       <h1>Main Page</h1>
       <CategoriesList categories={categoriesList} />
-      {/* <NavLink to='/category/category1'>Category 1</NavLink> */}
     </div>
   )
 }
