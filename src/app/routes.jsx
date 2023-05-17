@@ -30,7 +30,7 @@ const routes = [
   },
   {
     path: 'category',
-    elements: <CategoryLayout />,
+    element: <CategoryLayout />,
     children: [
       { path: '', element: <Navigate to='/' /> },
       { path: ':categoryId', element: <CategoryPage /> }
@@ -38,7 +38,7 @@ const routes = [
   },
   {
     path: 'product',
-    elements: <ProductLayout />,
+    element: <ProductLayout />,
     children: [
       { path: '', element: <Navigate to='/' /> },
       { path: ':productId', element: <ProductPage /> }
@@ -48,8 +48,8 @@ const routes = [
     path: 'cart',
     element: <CartLayout />,
     children: [
-      { path: '', element: <Navigate to='/cart/1' /> },
-      { path: ':userId', element: <CartPage /> }
+      { path: '', element: <CartPage /> },
+      { path: '*', element: <Navigate to='/cart' /> }
     ]
   },
   {

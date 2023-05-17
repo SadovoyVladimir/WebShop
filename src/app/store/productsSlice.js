@@ -65,6 +65,20 @@ export const getProductById = (productId) => (state) => {
   }
   return []
 }
+export const getProductsByIds = (productsIds) => (state) => {
+  if (state.products.entities) {
+    let products = []
+    productsIds?.forEach((id) => {
+      for (const prod of state.products.entities) {
+        if (id === prod.id) {
+          products.push(prod)
+          break
+        }
+      }
+    })
+    return products
+  }
+}
 export const getProductsByCategoryId = (categoryId) => (state) => {
   if (state.products.entities) {
     let products = []

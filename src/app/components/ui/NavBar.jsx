@@ -34,9 +34,9 @@ export default function NavBar() {
           </button>
 
           <div className='collapse navbar-collapse' id='navbarContent'>
-            {/* <div class='dropdown'>
+            {/* <div className='dropdown'>
               <button
-                class='btn btn-primary'
+                className='btn btn-primary'
                 type='button'
                 id='dropdownMenu2'
                 data-bs-toggle='dropdown'
@@ -44,19 +44,19 @@ export default function NavBar() {
               >
               <span className='navbar-toggler-icon'></span>
               </button>
-              <ul class='dropdown-menu' aria-labelledby='dropdownMenu2'>
+              <ul className='dropdown-menu' aria-labelledby='dropdownMenu2'>
                 <li>
-                  <button class='dropdown-item' type='button'>
+                  <button className='dropdown-item' type='button'>
                     Action
                   </button>
                 </li>
                 <li>
-                  <button class='dropdown-item' type='button'>
+                  <button className='dropdown-item' type='button'>
                     Another action
                   </button>
                 </li>
                 <li>
-                  <button class='dropdown-item' type='button'>
+                  <button className='dropdown-item' type='button'>
                     Something else here
                   </button>
                 </li>
@@ -75,7 +75,7 @@ export default function NavBar() {
               </li>
               <li className='nav-item'>
                 <NavLink to='/cart' className='nav-link'>
-                  Cart
+                  <i className='bi bi-cart' style={{ fontSize: 20 + 'px' }}></i>
                 </NavLink>
               </li>
               <li className='nav-item'>

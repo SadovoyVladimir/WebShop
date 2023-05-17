@@ -19,7 +19,7 @@ export default function AppLoader({ children }) {
   useEffect(() => {
     dispatch(loadProductsList())
     dispatch(loadCategoriesList())
-  }, [])
+  }, [dispatch])
 
   if (isLoading) return 'Loading...'
 
