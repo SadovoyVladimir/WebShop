@@ -1,10 +1,10 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
 
-export default function UserLayout() {
+export default function AddLayout() {
   return (
     <div>
-      <h2>User layout</h2>
+      <h2>Add layout</h2>
       <Outlet />
     </div>
   )

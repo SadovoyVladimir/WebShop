@@ -79,13 +79,18 @@ export default function NavBar() {
                 </NavLink>
               </li>
               <li className='nav-item'>
-                <NavLink to='/user' className='nav-link'>
-                  User
+                <NavLink to='/addition' className='nav-link'>
+                  Add product
                 </NavLink>
               </li>
               <li className='nav-item'>
-                <NavLink to='/user/addition' className='nav-link'>
-                  Add product
+                <NavLink to='/addition/create' className='nav-link'>
+                  Create
+                </NavLink>
+              </li>
+              <li className='nav-item'>
+                <NavLink to='/addition/edit' className='nav-link'>
+                  Edit
                 </NavLink>
               </li>
             </ul>
