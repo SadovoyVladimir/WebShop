@@ -14,7 +14,7 @@ export default function CartProductCard({
   deleteProduct
 }) {
   const subFromCart = () => {
-    cartLocalStorageService.subProdactFromStorage(id)
+    cartLocalStorageService.subProductFromStorage(id)
     subProduct(id)
   }
   const addToCart = () => {

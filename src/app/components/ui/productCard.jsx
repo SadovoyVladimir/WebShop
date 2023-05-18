@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import AddToCartButton from './addToCartButton'
+import CartButton from './cartButton'
 
 export default function ProductCard({ title, price, images, description, id }) {
   return (
@@ -27,11 +27,11 @@ export default function ProductCard({ title, price, images, description, id }) {
             <p className='card-text'>{id}</p>
           </div>
         </div>
-        <div className='col-md-2 text-center'>
+        <div className='col-md-2 d-flex flex-column align-self-center'>
           <p className='card-text mt-2'>
-            <small className='text-muted'>Price: {price}$</small>
+            <small className='text-muted'>Price for 1: {price}$</small>
           </p>
-          <AddToCartButton id={id} />
+          <CartButton id={id} />
         </div>
       </div>
     </div>

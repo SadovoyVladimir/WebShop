@@ -1,13 +1,12 @@
 import React from 'react'
-import cartLocalStorageService from '../../services/cartLocalStorage.service'
 
-export default function AddToCartButton({ id }) {
-  const addToCart = () => {
-    cartLocalStorageService.addProductIdToStorage(id)
-  }
-
+export default function AddToCartButton({ addHandler }) {
   return (
-    <button className='btn btn-primary' onClick={addToCart}>
+    <button
+      className='btn btn-primary'
+      style={{ width: 120 + 'px' }}
+      onClick={addHandler}
+    >
       В корзину
     </button>
   )

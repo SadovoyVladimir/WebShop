@@ -24,7 +24,7 @@ function addProductIdToStorage(id) {
   addProductsToStorage(allProducts)
 }
 
-function subProdactFromStorage(id) {
+function subProductFromStorage(id) {
   let allProducts = getCartInfo()
   allProducts.map((p) => p.id === id && --p.count)
   allProducts = allProducts.filter((p) => p.count !== 0)
@@ -46,7 +46,7 @@ function clearCart() {
 const cartLocalStorageService = {
   getCartInfo,
   addProductIdToStorage,
-  subProdactFromStorage,
+  subProductFromStorage,
   deleteProductFromStorage,
   clearCart
 }
