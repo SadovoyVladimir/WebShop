@@ -1,15 +1,17 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import CreateProductForm from '../ui/createProductForm'
 
 export default function CreateProductPage() {
   return (
-    <div>
-      <h2>Create Product Page</h2>
-      <div>
-        <NavLink to='/addition'>Add Page</NavLink>
+    <div className='container bg-white'>
+      <div className='row'>
+        <div className='col-md-10 offset-md-1 shadow p-4'>
+          <div>
+            <h1 className='mb-4'>Создание продукта</h1>
+            <CreateProductForm />
+          </div>
+        </div>
       </div>
-
-      <NavLink to='/addition/edit'>Edit page</NavLink>
     </div>
   )
 }

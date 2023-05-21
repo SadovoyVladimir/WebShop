@@ -37,10 +37,12 @@ export default function ProductsTable({ products, onSort, selectedSort }) {
     edit: {
       name: 'Редакт.',
       width: 10,
-      component: (product) => (
-        <p>
-          <i className='bi bi-pencil'></i>
-        </p>
+      component: () => (
+        <div className='d-flex align-items-center justify-content-center'>
+          <NavLink to='/addition/edit'>
+            <i className='bi bi-pencil' style={{ fontSize: 25 + 'px' }}></i>
+          </NavLink>
+        </div>
       )
     }
   }

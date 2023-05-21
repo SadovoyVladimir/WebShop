@@ -40,6 +40,7 @@ export default function TableHeader({ onSort, selectedSort, columns }) {
             {...{ role: columns[column].path && 'button' }}
             scope='col'
             style={{ width: `${columns[column].width}%` }}
+            className='unselectable'
           >
             {columns[column].name}
             {renderSortArrow(selectedSort.path, columns[column].path)}

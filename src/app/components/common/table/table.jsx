@@ -11,8 +11,8 @@ export default function Table({
 }) {
   return (
     <table
-      className='table table-primary table-hover table-bordered'
-      style={{ tableLayout: 'fixed' }}
+      className='table table-primary'
+      style={{ tableLayout: 'fixed', border: '1px solid black' }}
     >
       {children || (
         <>

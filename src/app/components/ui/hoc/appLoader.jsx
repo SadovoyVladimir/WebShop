@@ -8,6 +8,7 @@ import {
   getCategoriesLoadingStatus,
   loadCategoriesList
 } from '../../../store/categoriesSlice'
+import SpinnerLoader from '../../common/SpinnerLoader'
 
 export default function AppLoader({ children }) {
   const dispatch = useDispatch()
@@ -21,7 +22,7 @@ export default function AppLoader({ children }) {
     dispatch(loadCategoriesList())
   }, [dispatch])
 
-  if (isLoading) return 'Loading...'
+  if (isLoading) return <SpinnerLoader />
 
   return children
 }

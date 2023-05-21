@@ -5,6 +5,7 @@ import { getProducts } from '../../store/productsSlice'
 import { paginate } from '../../utils/paginate'
 import ProductsTable from '../ui/productsTable'
 import Pagination from '../common/pagination'
+import { NavLink } from 'react-router-dom'
 
 export default function AddProductPage() {
   const [currentPage, setCurrentPage] = useState(1)
@@ -57,6 +58,9 @@ export default function AddProductPage() {
             selectedSort={sortBy}
           />
         )}
+        <NavLink to='/addition/create'>
+          <button className='btn btn-primary'>+</button>
+        </NavLink>
         <div className='d-flex justify-content-center'>
           <Pagination
             itemsCount={count}

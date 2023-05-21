@@ -7,9 +7,25 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  /* display: none; <- Crashes Chrome on hover */
+  -webkit-appearance: none;
+  margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .left-part-btn {
@@ -26,7 +42,7 @@ code {
   }
   &:active {
     background-color: #074297;
-    transition: background-color 0.3s;
+    transition: background-color box-shadow 0.3s;
   }
 }
 
@@ -57,4 +73,45 @@ code {
   color: #fff;
   padding-left: 4px;
   padding-right: 4px;
+}
+
+.preview-image {
+  overflow: hidden;
+  & img {
+    width: 180px;
+    height: auto;
+  }
+  &:hover {
+    .preview-remove {
+      opacity: 1;
+    }
+    .preview-info {
+      bottom: 0px;
+    }
+  }
+}
+
+.preview-remove {
+  opacity: 0;
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  font-weight: bold;
+  background: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  transition: opacity .3s;
+}
+
+.preview-info {
+  position: absolute;
+  right: 0;
+  bottom: -30px;
+  left: 0;
+  height: 24px;
+  padding: 0 5px;
+  font-size: .8rem;
+  background: rgba(255, 255, 255, 0.7);
+  transition: bottom .3s;
 }
