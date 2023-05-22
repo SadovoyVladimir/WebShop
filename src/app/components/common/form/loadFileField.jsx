@@ -16,9 +16,9 @@ export default function LoadFileField({ value, name, onChange, error }) {
     if (!files) return
     setFiles(files)
     const imageArr = []
-    files.forEach((file) => {
+    files.forEach(file => {
       const reader = new FileReader()
-      reader.onload = (ev) => {
+      reader.onload = ev => {
         imageArr.push(ev.target.result)
         setImages(imageArr)
       }
@@ -26,7 +26,7 @@ export default function LoadFileField({ value, name, onChange, error }) {
     })
   }
 
-  const handleDelete = (i) => {
+  const handleDelete = i => {
     setImages((prevState, index) => {
       console.log(prevState, index)
       return prevState

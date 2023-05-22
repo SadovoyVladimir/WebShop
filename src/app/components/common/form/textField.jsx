@@ -17,7 +17,7 @@ export default function TextField({
     return 'form-control' + (error ? ' is-invalid' : '')
   }
   const toggleShowPassword = () => {
-    setShowPassword((prevState) => !prevState)
+    setShowPassword(prevState => !prevState)
   }
 
   return (

@@ -14,7 +14,7 @@ export default function Pagination({
   return (
     <nav className='m-2'>
       <ul className='pagination'>
-        {pages.map((page) => (
+        {pages.map(page => (
           <li
             key={'page_' + page}
             className={'page-item ' + (page === currentPage ? 'active' : '')}

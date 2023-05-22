@@ -14,7 +14,7 @@ export default function SearchPage() {
 
   if (isLoading) return 'Loading...'
 
-  const filteredProducts = productsList.filter((p) =>
+  const filteredProducts = productsList.filter(p =>
     p.title.toLowerCase().includes(state.toLowerCase())
   )
 

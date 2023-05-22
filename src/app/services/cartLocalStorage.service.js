@@ -15,10 +15,10 @@ function addProductIdToStorage(id) {
   let allProducts = getCartInfo()
   if (!allProducts) allProducts = []
 
-  if (!allProducts.filter((p) => p.id === id).length) {
+  if (!allProducts.filter(p => p.id === id).length) {
     allProducts.push({ id, count: 1 })
   } else {
-    allProducts.map((p) => p.id === id && ++p.count)
+    allProducts.map(p => p.id === id && ++p.count)
   }
 
   addProductsToStorage(allProducts)
@@ -26,15 +26,15 @@ function addProductIdToStorage(id) {
 
 function subProductFromStorage(id) {
   let allProducts = getCartInfo()
-  allProducts.map((p) => p.id === id && --p.count)
-  allProducts = allProducts.filter((p) => p.count !== 0)
+  allProducts.map(p => p.id === id && --p.count)
+  allProducts = allProducts.filter(p => p.count !== 0)
 
   addProductsToStorage(allProducts)
 }
 
 function deleteProductFromStorage(id) {
   let allProducts = getCartInfo()
-  allProducts = allProducts.filter((p) => p.id !== id)
+  allProducts = allProducts.filter(p => p.id !== id)
 
   addProductsToStorage(allProducts)
 }

@@ -6,7 +6,7 @@ export default function ProductsList({ products }) {
   const [sortBy, setSortBy] = useState({ path: 'price', order: 'asc' })
   const sortedProducts = _.orderBy(products, [sortBy.path], [sortBy.order])
 
-  const handleSort = (item) => {
+  const handleSort = item => {
     if (sortBy.path === item) {
       setSortBy({
         ...sortBy,
@@ -17,7 +17,7 @@ export default function ProductsList({ products }) {
     }
   }
 
-  const renderSortArrow = (path) => {
+  const renderSortArrow = path => {
     if (path === sortBy.path) {
       return (
         <i
@@ -42,7 +42,7 @@ export default function ProductsList({ products }) {
           {renderSortArrow('price')}
         </span>
       </p>
-      {sortedProducts.map((p) => (
+      {sortedProducts.map(p => (
         <ProductCard key={p.id} {...p} />
       ))}
     </>

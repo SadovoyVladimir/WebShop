@@ -18,10 +18,10 @@ export default function AddProductPage() {
     setCurrentPage(1)
   }, [])
 
-  const handlePageChange = (pageIndex) => {
+  const handlePageChange = pageIndex => {
     setCurrentPage(pageIndex)
   }
-  const handleSort = (item) => {
+  const handleSort = item => {
     setSortBy(item)
   }
 
@@ -42,7 +42,7 @@ export default function AddProductPage() {
 
   const count = products.length
   if (currentPage > Math.ceil(count / pageSize) && currentPage !== 1) {
-    setCurrentPage((prevState) => --prevState)
+    setCurrentPage(prevState => --prevState)
   }
   const sortedProducts = _.orderBy(products, [sortBy.path], [sortBy.order])
   const prodCrop = paginate(sortedProducts, currentPage, pageSize)

@@ -3,5 +3,6 @@ module.exports = {
   tabWidth: 2,
   semi: false,
   jsxSingleQuote: true,
-  singleQuote: true
+  singleQuote: true,
+  arrowParens: 'avoid'
 }

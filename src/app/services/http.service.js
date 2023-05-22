@@ -41,14 +41,14 @@ httpService.interceptors.request.use(
 
 function transformData(data) {
   return data && !data._id
-    ? Object.keys(data).map((key) => ({
+    ? Object.keys(data).map(key => ({
         ...data[key]
       }))
     : data
 }
 
 httpService.interceptors.response.use(
-  (res) => {
+  res => {
     if (configFile.isFirebase) {
       res.data = { content: transformData(res.data) }
     }

@@ -8,7 +8,7 @@ export default function NavBar() {
     setValue(target.value)
   }
 
-  const handleSearch = (event) => {
+  const handleSearch = event => {
     event.preventDefault()
     navigate(`/search/${value}`, { state: value })
     setValue('')

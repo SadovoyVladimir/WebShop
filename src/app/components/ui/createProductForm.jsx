@@ -21,8 +21,8 @@ export default function CreateProductForm() {
   const [isCreateCategory, setCreateCategory] = useState(false)
   const [data, setData] = useState(initialData)
   const [errors, setErrors] = useState({})
-  const handleChange = (target) => {
-    setData((prevState) => ({ ...prevState, [target.name]: target.value }))
+  const handleChange = target => {
+    setData(prevState => ({ ...prevState, [target.name]: target.value }))
   }
   const imageInfo = {
     id: 'addImage',
@@ -76,9 +76,8 @@ export default function CreateProductForm() {
   }
 
   const changeCreateCategoryType = () => {
-    if (isCreateCategory)
-      setData((prevState) => ({ ...prevState, category: '' }))
-    setCreateCategory((prevState) => !prevState)
+    if (isCreateCategory) setData(prevState => ({ ...prevState, category: '' }))
+    setCreateCategory(prevState => !prevState)
   }
 
   useEffect(() => {
@@ -93,7 +92,7 @@ export default function CreateProductForm() {
 
   const isValid = !Object.keys(errors).length
 
-  const handleSubmit = (e) => {
+  const handleSubmit = e => {
     e.preventDefault()
     const isValid = validate()
     if (!isValid) return

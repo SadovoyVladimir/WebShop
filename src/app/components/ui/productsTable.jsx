@@ -14,25 +14,25 @@ export default function ProductsTable({ products, onSort, selectedSort }) {
       path: 'title',
       name: 'Название',
       width: 30,
-      component: (product) => (
+      component: product => (
         <NavLink to={`/product/${product.id}`}>{product.title}</NavLink>
       )
     },
     category: {
       name: 'Категория',
       width: 20,
-      component: (product) => <p>{product.category.name}</p>
+      component: product => <p>{product.category.name}</p>
     },
     price: {
       path: 'price',
       name: 'Цена, $',
       width: 13,
-      component: (product) => <p>{product.price}</p>
+      component: product => <p>{product.price}</p>
     },
     url: {
       name: 'Адрес картинки',
       width: 20,
-      component: (product) => <p style={style}>{product.images[0]}</p>
+      component: product => <p style={style}>{product.images[0]}</p>
     },
     edit: {
       name: 'Редакт.',

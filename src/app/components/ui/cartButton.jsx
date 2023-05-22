@@ -6,11 +6,11 @@ import cartLocalStorageService from '../../services/cartLocalStorage.service'
 export default function CartButton({ id }) {
   const cartProducts = cartLocalStorageService.getCartInfo()
   const [quantity, setQuantity] = useState(
-    cartProducts?.filter((p) => p.id === id)[0]?.count
+    cartProducts?.filter(p => p.id === id)[0]?.count
   )
 
   const handleAdd = () => {
-    setQuantity((prevState) => {
+    setQuantity(prevState => {
       if (!prevState) return 1
       return ++prevState
     })
@@ -18,7 +18,7 @@ export default function CartButton({ id }) {
   }
 
   const handleSub = () => {
-    setQuantity((prevState) => --prevState)
+    setQuantity(prevState => --prevState)
     cartLocalStorageService.subProductFromStorage(id)
   }
 

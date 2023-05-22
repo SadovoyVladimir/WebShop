@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom'
 
 const withRouter =
-  (Component) =>
+  Component =>
   ({ ...props }) => {
     return (
       <BrowserRouter>

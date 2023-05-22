@@ -15,9 +15,9 @@ export default function TableBody({ data, columns }) {
 
   return (
     <tbody>
-      {data.map((item) => (
+      {data.map(item => (
         <tr key={item.id}>
-          {Object.keys(columns).map((column) => (
+          {Object.keys(columns).map(column => (
             <td key={column}>{renderContent(item, column)}</td>
           ))}
         </tr>

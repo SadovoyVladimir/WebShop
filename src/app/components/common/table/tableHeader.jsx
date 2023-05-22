@@ -1,7 +1,7 @@
 import React from 'react'
 
 export default function TableHeader({ onSort, selectedSort, columns }) {
-  const handleSort = (item) => {
+  const handleSort = item => {
     if (selectedSort.path === item) {
       onSort({
         ...selectedSort,
@@ -29,7 +29,7 @@ export default function TableHeader({ onSort, selectedSort, columns }) {
   return (
     <thead>
       <tr>
-        {Object.keys(columns).map((column) => (
+        {Object.keys(columns).map(column => (
           <th
             key={column}
             onClick={

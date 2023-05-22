@@ -10,7 +10,7 @@ const productsSlice = createSlice({
     lastFetch: null
   },
   reducers: {
-    productsRequested: (state) => {
+    productsRequested: state => {
       state.isLoading = true
     },
     productsRecieved: (state, action) => {
@@ -49,10 +49,9 @@ export const loadProductsList = () => async (dispatch, getState) => {
   }
 }
 
-export const getProducts = () => (state) => state.products.entities
-export const getProductsLoadingStatus = () => (state) =>
-  state.products.isLoading
-export const getProductById = (productId) => (state) => {
+export const getProducts = () => state => state.products.entities
+export const getProductsLoadingStatus = () => state => state.products.isLoading
+export const getProductById = productId => state => {
   if (state.products.entities) {
     let product
     for (const prod of state.products.entities) {
@@ -65,10 +64,10 @@ export const getProductById = (productId) => (state) => {
   }
   return []
 }
-export const getProductsByIds = (productsIds) => (state) => {
+export const getProductsByIds = productsIds => state => {
   if (state.products.entities) {
     let products = []
-    productsIds?.forEach((id) => {
+    productsIds?.forEach(id => {
       for (const prod of state.products.entities) {
         if (id === prod.id) {
           products.push(prod)
@@ -79,7 +78,7 @@ export const getProductsByIds = (productsIds) => (state) => {
     return products
   }
 }
-export const getProductsByCategoryId = (categoryId) => (state) => {
+export const getProductsByCategoryId = categoryId => state => {
   if (state.products.entities) {
     let products = []
     for (const prod of state.products.entities) {

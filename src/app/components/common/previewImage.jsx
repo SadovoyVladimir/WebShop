@@ -2,9 +2,7 @@ import React from 'react'
 import bytesToSize from '../../utils/bytesToSize'
 
 export default function PreviewImage({ images, files, onDelete }) {
-  const handleDelete = () => {
-    
-  }
+  const handleDelete = () => {}
 
   return (
     <div className='d-flex flex-wrap p-2 preview'>
@@ -14,7 +12,10 @@ export default function PreviewImage({ images, files, onDelete }) {
           key={file.lastModified}
           style={{ position: 'relative' }}
         >
-          <div onClick={handleDelete} className='d-flex align-items-center justify-content-center preview-remove'>
+          <div
+            onClick={handleDelete}
+            className='d-flex align-items-center justify-content-center preview-remove'
+          >
             &times;
           </div>
           <img

@@ -10,7 +10,7 @@ const categoriesSlice = createSlice({
     lastFetch: null
   },
   reducers: {
-    categoriesRequested: (state) => {
+    categoriesRequested: state => {
       state.isLoading = true
     },
     categoriesRecieved: (state, action) => {
@@ -50,10 +50,10 @@ export const loadCategoriesList = () => async (dispatch, getState) => {
   }
 }
 
-export const getCategories = () => (state) => state.categories.entities
-export const getCategoriesLoadingStatus = () => (state) =>
+export const getCategories = () => state => state.categories.entities
+export const getCategoriesLoadingStatus = () => state =>
   state.categories.isLoading
-export const getCategoryById = (categoryId) => (state) => {
+export const getCategoryById = categoryId => state => {
   if (state.categories.entities) {
     let category
     for (const cat of state.categories.entities) {
