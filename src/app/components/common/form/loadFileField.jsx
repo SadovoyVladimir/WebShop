@@ -53,7 +53,7 @@ export default function LoadFileField({ value, name, onChange, error }) {
         />
         {error && <div className='invalid-feedback'>{error}</div>}
       </div>
-      {!images ? <></> : <PreviewImage images={images} files={files} />}
+      {!images ? <></> : <PreviewImage onDelete={handleDelete} images={images} files={files} />}
     </div>
   )
 }
