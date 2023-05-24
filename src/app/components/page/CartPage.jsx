@@ -59,22 +59,26 @@ export default function CartPage() {
     deleteProduct
   }
 
-  if (!localStorageCart || !countCartProducts.length) return <EmptyCartInfo />
+  const condition = !localStorageCart || !countCartProducts.length
 
   return (
     <div>
       <div className='d-flex mb-4'>
         <h2 className='me-5'>Корзина</h2>
-        <ClearCartButton clearCart={clearCart} />
+        {!condition && <ClearCartButton clearCart={clearCart} />}
       </div>
-      <div className='d-flex justify-content-between mt-3'>
-        <div style={{ width: 60 + '%' }}>
-          <CartList products={countCartProducts} functions={functions} />
+      {condition ? (
+        <EmptyCartInfo />
+      ) : (
+        <div className='d-flex justify-content-between mt-3'>
+          <div style={{ width: 60 + '%' }}>
+            <CartList products={countCartProducts} functions={functions} />
+          </div>
+          <div style={{ width: 35 + '%' }}>
+            <CartInfo totalCount={totalCount} totalPrice={totalPrice} />
+          </div>
         </div>
-        <div style={{ width: 35 + '%' }}>
-          <CartInfo totalCount={totalCount} totalPrice={totalPrice} />
-        </div>
-      </div>
+      )}
     </div>
   )
 }

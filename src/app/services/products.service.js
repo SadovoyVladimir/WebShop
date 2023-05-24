@@ -6,6 +6,24 @@ const productsService = {
   get: async () => {
     const { data } = await httpService.get(productEndpoint)
     return data
+  },
+  create: async payload => {
+    const { data } = await httpService.put(
+      productEndpoint + payload.id,
+      payload
+    )
+    return data
+  },
+  update: async payload => {
+    const { data } = await httpService.patch(
+      productEndpoint + payload.id,
+      payload
+    )
+    return data
+  },
+  removeProduct: async productId => {
+    const { data } = await httpService.delete(productEndpoint + productId)
+    return data
   }
 }
 

@@ -6,7 +6,10 @@ export default function Modal({
   body,
   firstBtnText,
   secondBtnText,
-  minWidth
+  minWidth,
+  onCancel,
+  onSave,
+  isValid = true
 }) {
   return (
     <div
@@ -29,17 +32,25 @@ export default function Modal({
               className='btn-close'
               data-bs-dismiss='modal'
               aria-label='Close'
+              onClick={onCancel}
             ></button>
           </div>
           <div className='modal-body'>{body}</div>
           <div className='modal-footer'>
-            <button type='button' className='btn btn-primary'>
+            <button
+              type='button'
+              className='btn btn-primary'
+              data-bs-dismiss='modal'
+              onClick={onSave}
+              disabled={!isValid}
+            >
               {firstBtnText}
             </button>
             <button
               type='button'
               className='btn btn-secondary'
               data-bs-dismiss='modal'
+              onClick={onCancel}
             >
               {secondBtnText}
             </button>

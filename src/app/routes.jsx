@@ -57,7 +57,13 @@ const routes = [
     element: <AddLayout />,
     children: [
       { path: '', element: <AddProductPage /> },
-      { path: 'edit', element: <EditProductPage /> },
+      {
+        path: 'edit',
+        children: [
+          { path: '', element: <Navigate to='/addition' /> },
+          { path: ':productId', element: <EditProductPage /> }
+        ]
+      },
       { path: 'create', element: <CreateProductPage /> },
       { path: '*', element: <Navigate to='/addition' /> }
     ]

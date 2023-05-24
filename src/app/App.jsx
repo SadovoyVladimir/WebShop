@@ -1,11 +1,11 @@
 import React from 'react'
+import { useRoutes } from 'react-router-dom'
+import { ToastContainer } from 'react-toastify'
 import withRouter from './components/ui/hoc/withRouter'
 import NavBar from './components/ui/NavBar'
-import { useRoutes } from 'react-router-dom'
 import routes from './routes'
 import withRedux from './components/ui/hoc/withRedux'
 import AppLoader from './components/ui/hoc/appLoader'
-import { ToastContainer } from 'react-toastify'
 
 function App() {
   const elements = useRoutes(routes)

@@ -24,7 +24,7 @@ export default function SelectField({
 
   return (
     <div className='mb-4'>
-      <label htmlFor={name} className='form-label'>
+      <label htmlFor={name} className='form-label mb-0'>
         {label}
       </label>
       <select

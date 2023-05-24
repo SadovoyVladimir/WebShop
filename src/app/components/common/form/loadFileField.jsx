@@ -1,40 +1,41 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef } from 'react'
 import PreviewImage from '../previewImage'
 
-export default function LoadFileField({ value, name, onChange, error }) {
+export default function LoadFileField({
+  value,
+  name,
+  onChange,
+  error,
+  onDelete,
+  isMultiple = true
+}) {
   const accept = ['.png', '.jpg', '.jpeg', '.gif']
 
-  const [images, setImages] = useState(null)
-  const [files, setFiles] = useState(null)
   const inputRef = useRef(null)
 
   const handleChange = ({ target }) => {
-    setImages(null)
-    setFiles(null)
     const files = Array.from(target.files)
-    onChange({ name: target.name, value: target.value })
-    if (!files) return
-    setFiles(files)
-    const imageArr = []
+    if (!files.length) return onChange({ name: target.name, value: [] })
+
+    const imageInfo = []
     files.forEach(file => {
       const reader = new FileReader()
       reader.onload = ev => {
-        imageArr.push(ev.target.result)
-        setImages(imageArr)
+        imageInfo.push(ev.target.result)
+        onChange({ name: target.name, value: imageInfo })
       }
       reader.readAsDataURL(file)
     })
   }
 
   const handleDelete = i => {
-    setImages((prevState, index) => {
-      console.log(prevState, index)
-      return prevState
-    })
+    onDelete(i)
   }
-
   const getInputClasses = () => {
     return 'form-control' + (error ? ' is-invalid' : '')
+  }
+  const handleClick = () => {
+    inputRef.current.click()
   }
 
   return (
@@ -45,15 +46,20 @@ export default function LoadFileField({ value, name, onChange, error }) {
           type='file'
           id={name}
           name={name}
-          value={value}
           onChange={handleChange}
           className={getInputClasses()}
-          multiple={true}
+          multiple={isMultiple}
           accept={accept?.join(',')}
         />
+        <button
+          className={`btn btn-${error ? 'danger' : 'primary'}`}
+          onClick={handleClick}
+        >
+          {error ? 'Выбрать' : 'Изменить'}
+        </button>
         {error && <div className='invalid-feedback'>{error}</div>}
       </div>
-      {!images ? <></> : <PreviewImage onDelete={handleDelete} images={images} files={files} />}
+      {value && <PreviewImage onDelete={handleDelete} value={value} />}
     </div>
   )
 }

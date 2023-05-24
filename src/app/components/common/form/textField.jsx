@@ -11,7 +11,9 @@ export default function TextField({
   const [showPassword, setShowPassword] = useState(false)
 
   const handleChange = ({ target }) => {
-    onChange({ name: target.name, value: target.value })
+    let { value } = target
+    if (type === 'number' && value !== '') value = +value
+    onChange({ name: target.name, value })
   }
   const getInputClasses = () => {
     return 'form-control' + (error ? ' is-invalid' : '')

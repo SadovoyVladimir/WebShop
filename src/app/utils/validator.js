@@ -4,10 +4,22 @@ export function validator(data, config) {
     let statusValidate
     switch (validateMethod) {
       case 'isRequired': {
-        if (typeof data === 'boolean') {
+        if (typeof data === 'boolean' || typeof data === 'number') {
           statusValidate = !data
+        } else if (Array.isArray(data)) {
+          statusValidate = !data.length
+        } else if (typeof data === 'object') {
+          statusValidate = false
         } else {
           statusValidate = data.trim() === ''
+        }
+        break
+      }
+      case 'isCategory': {
+        if (typeof data === 'object') {
+          statusValidate = !data.name.length || !data.imageInfo.length
+        } else {
+          statusValidate = false
         }
         break
       }
@@ -46,6 +58,10 @@ export function validator(data, config) {
       }
       case 'min': {
         statusValidate = data.length < config.value
+        break
+      }
+      case 'max': {
+        statusValidate = data.length > config.value
         break
       }
       default:

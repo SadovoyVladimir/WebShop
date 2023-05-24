@@ -1,15 +1,19 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { useSelector } from 'react-redux'
+import { Navigate, useParams } from 'react-router-dom'
+import { getProductById } from '../../store/productsSlice'
+import CreateProductForm from '../ui/createProductForm'
 
 export default function EditProductPage() {
+  const { productId } = useParams()
+  const product = useSelector(getProductById(productId))
+  if (!product) return <Navigate to='/addition' />
   return (
-    <div>
-      <h2>Edit Product Page</h2>
-      <div>
-        <NavLink to='/addition'>Add Page</NavLink>
+    <div className='row'>
+      <div className='col-md-10 offset-md-1 shadow p-4'>
+        <h2>Edit Product Page</h2>
+        <CreateProductForm product={product} />
       </div>
-
-      <NavLink to='/addition/create'>Create Page</NavLink>
     </div>
   )
 }

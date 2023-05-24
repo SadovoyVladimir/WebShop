@@ -63,11 +63,6 @@ export default function NavBar() {
               </ul>
             </div> */}
             <ul className='navbar-nav me-auto mb-2 mb-lg-0'>
-              {/* <li className='nav-item'>
-              <NavLink to='/' className='nav-link'>
-                Home
-              </NavLink>
-            </li> */}
               <li className='nav-item'>
                 <NavLink to='/auth/login' className='nav-link'>
                   Login
@@ -80,17 +75,7 @@ export default function NavBar() {
               </li>
               <li className='nav-item'>
                 <NavLink to='/addition' className='nav-link'>
-                  Add product
-                </NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink to='/addition/create' className='nav-link'>
-                  Create
-                </NavLink>
-              </li>
-              <li className='nav-item'>
-                <NavLink to='/addition/edit' className='nav-link'>
-                  Edit
+                  Products
                 </NavLink>
               </li>
             </ul>

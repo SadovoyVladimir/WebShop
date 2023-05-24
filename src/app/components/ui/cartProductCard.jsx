@@ -4,9 +4,9 @@ import AddSubButton from '../common/addSubButton'
 import cartLocalStorageService from '../../services/cartLocalStorage.service'
 
 export default function CartProductCard({
-  title,
+  name,
   price,
-  images,
+  imagesInfo,
   id,
   count,
   addProduct,
@@ -31,7 +31,7 @@ export default function CartProductCard({
         <div className='col-md-2'>
           <NavLink to={`/product/${id}`}>
             <img
-              src={images[0]}
+              src={imagesInfo[0]}
               className='img-fluid rounded-start'
               alt='no images'
             />
@@ -43,7 +43,7 @@ export default function CartProductCard({
               to={`/product/${id}`}
               className='text-decoration-none text-reset'
             >
-              <h5 className='card-title'>{title}</h5>
+              <h5 className='card-title'>{name}</h5>
             </NavLink>
           </div>
         </div>

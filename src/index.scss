@@ -28,6 +28,14 @@ code {
   user-select: none;
 }
 
+.no-valid {
+  color: #dc3545;
+}
+
+input[type='file'] {
+  display: none;
+}
+
 .left-part-btn {
   border-radius: 50px 0 0 50px;
   border: none;
@@ -102,16 +110,4 @@ code {
   background: rgba(255, 255, 255, 0.5);
   cursor: pointer;
   transition: opacity 0.3s;
-}
-
-.preview-info {
-  position: absolute;
-  right: 0;
-  bottom: -30px;
-  left: 0;
-  height: 24px;
-  padding: 0 5px;
-  font-size: 0.8rem;
-  background: rgba(255, 255, 255, 0.7);
-  transition: bottom 0.3s;
 }

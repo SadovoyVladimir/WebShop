@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAction, createSlice } from '@reduxjs/toolkit'
 import categoriesService from '../services/categories.service'
 
 const categoriesSlice = createSlice({
@@ -21,13 +21,28 @@ const categoriesSlice = createSlice({
     categoriesRequestFailed: (state, action) => {
       state.error = action.payload
       state.isLoading = false
+    },
+    categoryCreated: (state, action) => {
+      if (!Array.isArray(state.entities)) {
+        state.entities = []
+      }
+      state.entities.push(action.payload)
     }
   }
 })
 const { reducer: categoriesReducer, actions } = categoriesSlice
 
-const { categoriesRequested, categoriesRecieved, categoriesRequestFailed } =
-  actions
+const {
+  categoriesRequested,
+  categoriesRecieved,
+  categoriesRequestFailed,
+  categoryCreated
+} = actions
+
+const categoryCreateRequested = createAction(
+  'categories/categoryCreateRequested'
+)
+const createCategoryFailed = createAction('categories/createCategoryFailed')
 
 function isOutdated(date) {
   if (Date.now() - date > 10 * 60 * 1000) {
@@ -50,6 +65,18 @@ export const loadCategoriesList = () => async (dispatch, getState) => {
   }
 }
 
+export const createCategory = payload => {
+  return async function (dispatch) {
+    dispatch(categoryCreateRequested())
+    try {
+      await categoriesService.create(payload)
+      dispatch(categoryCreated(payload))
+    } catch (error) {
+      dispatch(createCategoryFailed(error.message))
+    }
+  }
+}
+
 export const getCategories = () => state => state.categories.entities
 export const getCategoriesLoadingStatus = () => state =>
   state.categories.isLoading
@@ -57,7 +84,7 @@ export const getCategoryById = categoryId => state => {
   if (state.categories.entities) {
     let category
     for (const cat of state.categories.entities) {
-      if (cat.id === +categoryId) {
+      if (cat.id === categoryId) {
         category = cat
         break
       }

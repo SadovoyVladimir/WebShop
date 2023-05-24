@@ -1,4 +1,4 @@
-import { createSlice } from '@reduxjs/toolkit'
+import { createAction, createSlice } from '@reduxjs/toolkit'
 import productsService from '../services/products.service'
 
 const productsSlice = createSlice({
@@ -21,12 +21,39 @@ const productsSlice = createSlice({
     productsRequestFailed: (state, action) => {
       state.error = action.payload
       state.isLoading = false
+    },
+    productCreated: (state, action) => {
+      if (!Array.isArray(state.entities)) {
+        state.entities = []
+      }
+      state.entities.push(action.payload)
+    },
+    productUpdated: (state, action) => {
+      const index = state.entities.findIndex(u => u.id === action.payload.id)
+      state.entities[index] = { ...state.entities[index], ...action.payload }
+    },
+    productRemoved: (state, action) => {
+      state.entities = state.entities.filter(c => c.id !== action.payload)
     }
   }
 })
 const { reducer: productsReducer, actions } = productsSlice
 
-const { productsRequested, productsRecieved, productsRequestFailed } = actions
+const {
+  productsRequested,
+  productsRecieved,
+  productsRequestFailed,
+  productCreated,
+  productUpdated,
+  productRemoved
+} = actions
+
+const productCreateRequested = createAction('products/productCreateRequested')
+const createProductFailed = createAction('products/createProductFailed')
+const productUpdateRequested = createAction('products/productUpdateRequested')
+const updateProductFailed = createAction('products/updateProductFailed')
+const productRemoveRequested = createAction('products/productRemoveRequested')
+const removeProductFailed = createAction('products/removeProductFailed')
 
 function isOutdated(date) {
   if (Date.now() - date > 10 * 60 * 1000) {
@@ -49,13 +76,49 @@ export const loadProductsList = () => async (dispatch, getState) => {
   }
 }
 
+export const createProduct = payload => {
+  return async function (dispatch) {
+    dispatch(productCreateRequested())
+    try {
+      await productsService.create(payload)
+      dispatch(productCreated(payload))
+    } catch (error) {
+      dispatch(createProductFailed(error.message))
+    }
+  }
+}
+
+export const updateProduct = payload => {
+  return async function (dispatch) {
+    dispatch(productUpdateRequested())
+    try {
+      await productsService.update(payload)
+      dispatch(productUpdated(payload))
+    } catch (error) {
+      dispatch(updateProductFailed())
+    }
+  }
+}
+
+export const removeProduct = productId => async dispatch => {
+  dispatch(productRemoveRequested())
+  try {
+    const { content } = await productsService.removeProduct(productId)
+    if (content === null) {
+      dispatch(productRemoved(productId))
+    }
+  } catch (error) {
+    dispatch(removeProductFailed(error.message))
+  }
+}
+
 export const getProducts = () => state => state.products.entities
 export const getProductsLoadingStatus = () => state => state.products.isLoading
 export const getProductById = productId => state => {
   if (state.products.entities) {
     let product
     for (const prod of state.products.entities) {
-      if (prod.id === +productId) {
+      if (prod.id === productId) {
         product = prod
         break
       }
@@ -82,7 +145,7 @@ export const getProductsByCategoryId = categoryId => state => {
   if (state.products.entities) {
     let products = []
     for (const prod of state.products.entities) {
-      if (prod.category.id === +categoryId) {
+      if (prod.category === categoryId) {
         products.push(prod)
       }
     }
