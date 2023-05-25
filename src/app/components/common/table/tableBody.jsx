@@ -2,11 +2,11 @@ import React from 'react'
 import _ from 'lodash'
 
 export default function TableBody({ data, columns }) {
-  const renderContent = (item, column) => {
+  const renderContent = (item, column, index) => {
     const component = columns[column].component
     if (component) {
       if (typeof component === 'function') {
-        return component(item)
+        return component(item, index)
       }
       return component
     }
@@ -15,10 +15,10 @@ export default function TableBody({ data, columns }) {
 
   return (
     <tbody>
-      {data.map(item => (
+      {data.map((item, index) => (
         <tr key={item.id}>
           {Object.keys(columns).map(column => (
-            <td key={column}>{renderContent(item, column)}</td>
+            <td key={column}>{renderContent(item, column, index)}</td>
           ))}
         </tr>
       ))}

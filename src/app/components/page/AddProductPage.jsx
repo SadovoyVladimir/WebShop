@@ -9,7 +9,6 @@ import Pagination from '../common/pagination'
 
 export default function AddProductPage() {
   const [currentPage, setCurrentPage] = useState(1)
-  // const currentUserId = useSelector(getCurrentUserId())
   const products = useSelector(getProducts())
   const [sortBy, setSortBy] = useState({ path: 'name', order: 'asc' })
   const pageSize = 7
@@ -34,8 +33,8 @@ export default function AddProductPage() {
     const prodCrop = paginate(sortedProducts, currentPage, pageSize)
 
     return (
-      <div>
-        <h1>Your product table</h1>
+      <div className='pt-2'>
+        <h1 className='p-2 mb-3'>Таблица всех товаров</h1>
         <div className='d-flex flex-column'>
           {count > 0 && (
             <ProductsTable
@@ -44,7 +43,7 @@ export default function AddProductPage() {
               selectedSort={sortBy}
             />
           )}
-          <NavLink to='/addition/create'>
+          <NavLink to='/products/create'>
             <button className='btn btn-primary'>+</button>
           </NavLink>
           <div className='d-flex justify-content-center'>
@@ -60,8 +59,16 @@ export default function AddProductPage() {
     )
   }
   return (
-    <NavLink to='/addition/create'>
-      <button className='btn btn-primary'>+</button>
-    </NavLink>
+    <div className='pt-2'>
+      <h1 className='p-2 mb-3'>Таблица всех товаров</h1>
+      <div className='d-flex flex-column'>
+        <div>
+          <h2>Пока что нет ни одного товара!</h2>
+        </div>
+        <NavLink to='/products/create'>
+          <button className='btn btn-primary'>+</button>
+        </NavLink>
+      </div>
+    </div>
   )
 }

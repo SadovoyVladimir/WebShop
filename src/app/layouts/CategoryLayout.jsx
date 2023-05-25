@@ -3,8 +3,7 @@ import { Outlet } from 'react-router-dom'
 
 export default function CategoryLayout() {
   return (
-    <div>
-      <h2>Category layout</h2>
+    <div className='mt-4'>
       <Outlet />
     </div>
   )

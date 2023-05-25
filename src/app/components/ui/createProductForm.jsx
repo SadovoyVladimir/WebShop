@@ -15,8 +15,10 @@ import AddImageModal from './addImageModal'
 import PreviewImage from '../common/previewImage'
 import CreateCategory from './createCategory'
 import { createProduct, updateProduct } from '../../store/productsSlice'
+import { getCurrentUserId } from '../../store/usersSlice'
 
 export default function CreateProductForm({ product }) {
+  const userId = useSelector(getCurrentUserId())
   const categories = useSelector(getCategories())
   let initialData = {
     id: nanoid(),
@@ -33,7 +35,9 @@ export default function CreateProductForm({ product }) {
   }
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [isCreateCategory, setCreateCategory] = useState(false)
+  const [isCreateCategory, setCreateCategory] = useState(
+    categories ? false : true
+  )
   const [data, setData] = useState(initialData)
   const [errors, setErrors] = useState({})
   const newCategory = { id: nanoid(), name: data.category, imageInfo: [] }
@@ -112,7 +116,7 @@ export default function CreateProductForm({ product }) {
     const isValid = validate()
     if (!isValid) return
     const categoriesNames = categories?.map(category => category.name)
-    const newData = { ...data }
+    const newData = { ...data, userId, price: +data.price }
     if (data.category.name) {
       if (!categories || !categoriesNames.includes(data.category.name)) {
         const newCategory = {
@@ -129,13 +133,12 @@ export default function CreateProductForm({ product }) {
         catName => catName === data.category
       )
       newData.category = categories[catIndex].id
-      newData.price = +newData.price
     }
     // console.log(newData)
     if (product) {
-      dispatch(updateProduct(newData)).then(navigate('addition'))
+      dispatch(updateProduct(newData)).then(() => navigate('/products'))
     } else {
-      dispatch(createProduct(newData)).then(navigate('addition'))
+      dispatch(createProduct(newData)).then(() => navigate('/products'))
     }
   }
 
@@ -164,7 +167,16 @@ export default function CreateProductForm({ product }) {
         error={errors.price}
       />
       <div className='mb-3'>
-        <h3>Категория</h3>
+        <div className='d-flex'>
+          <h3 className='me-3'>Категория</h3>
+          <button
+            type='button'
+            className='btn btn-primary'
+            onClick={changeCreateCategoryType}
+          >
+            {isCreateCategory ? 'Выбрать категорию' : 'Создать'}
+          </button>
+        </div>
         {!isCreateCategory && categories ? (
           <SelectField
             label='Выберите категорию'
@@ -178,28 +190,27 @@ export default function CreateProductForm({ product }) {
         ) : (
           <CreateCategory value={data.category} onChange={handleChange} />
         )}
-        <button
-          type='button'
-          className='btn btn-primary'
-          onClick={changeCreateCategoryType}
-        >
-          {isCreateCategory ? 'Выбрать категорию' : 'Создать'}
-        </button>
       </div>
       <div>
-        <h3>Добавить картинку(и)</h3>
+        <div className='d-flex mb-3'>
+          <h3 className='me-3'>Добавить картинку(и)</h3>
+          <button
+            type='button'
+            className={`btn btn-${
+              errors.imagesInfo ? 'danger' : 'primary'
+            } me-2`}
+            data-bs-toggle='modal'
+            data-bs-target={'#' + imageInfo.id}
+          >
+            {data.imagesInfo.length ? 'Изменить' : 'Выбрать'}
+          </button>
+          {errors.imagesInfo && (
+            <div className='no-valid d-flex align-items-center'>
+              {errors.imagesInfo}
+            </div>
+          )}
+        </div>
         <AddImageModal {...imageInfo} />
-        <button
-          type='button'
-          className={`btn btn-${errors.imagesInfo ? 'danger' : 'primary'}`}
-          data-bs-toggle='modal'
-          data-bs-target={'#' + imageInfo.id}
-        >
-          {data.imagesInfo.length ? 'Изменить' : 'Выбрать'}
-        </button>
-        {errors.imagesInfo && (
-          <div className='no-valid'>{errors.imagesInfo}</div>
-        )}
         {!!data.imagesInfo.length && (
           <PreviewImage onDelete={deleteImageInfo} value={data.imagesInfo} />
         )}

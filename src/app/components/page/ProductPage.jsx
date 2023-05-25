@@ -11,7 +11,7 @@ export default function ProductPage() {
 
   return (
     <div className='container'>
-      <h1 className='text-center mb-4'>{product.title}</h1>
+      <h1 className='text-center mb-4'>{product.name}</h1>
       <div
         className='d-flex justify-content-between align-items-stretch'
         style={{ width: 100 + '%' }}

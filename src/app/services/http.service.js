@@ -1,8 +1,8 @@
 import axios from 'axios'
 import { toast } from 'react-toastify'
 import configFile from '../config.json'
-// import localStorageService from './localStorage.service'
-// import authService from './auth.service'
+import localStorageService from './localStorage.service'
+import authService from './auth.service'
 
 const httpService = axios.create({
   baseURL: configFile.apiEndPoint
@@ -15,22 +15,22 @@ httpService.interceptors.request.use(
       config.url =
         (containSlash ? config.url.slice(0, -1) : config.url) + '.json'
 
-      // const expiresDate = localStorageService.getTokenExpiresDate()
-      // const refreshToken = localStorageService.getRefreshToken()
-      // if (refreshToken && expiresDate < Date.now()) {
-      //   const data = await authService.refresh()
+      const expiresDate = localStorageService.getTokenExpiresDate()
+      const refreshToken = localStorageService.getRefreshToken()
+      if (refreshToken && expiresDate < Date.now()) {
+        const data = await authService.refresh()
 
-      //   localStorageService.setTokens({
-      //     refreshToken: data.refresh_token,
-      //     idToken: data.id_token,
-      //     expiresIn: data.expires_in,
-      //     localId: data.user_id
-      //   })
-      // }
-      // const accessToken = localStorageService.getAccessToken()
-      // if (accessToken) {
-      //   config.params = { ...config.params, auth: accessToken }
-      // }
+        localStorageService.setTokens({
+          refreshToken: data.refresh_token,
+          idToken: data.id_token,
+          expiresIn: data.expires_in,
+          localId: data.user_id
+        })
+      }
+      const accessToken = localStorageService.getAccessToken()
+      if (accessToken) {
+        config.params = { ...config.params, auth: accessToken }
+      }
     }
     return config
   },

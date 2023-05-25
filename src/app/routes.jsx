@@ -16,7 +16,7 @@ import AddProductPage from './components/page/AddProductPage'
 import CartPage from './components/page/CartPage'
 import SearchPage from './components/page/SearchPage'
 
-const routes = [
+const routes = (isLoggedIn, location) => [
   { path: '/', element: <MainPage /> },
   {
     path: 'auth',
@@ -53,19 +53,23 @@ const routes = [
     ]
   },
   {
-    path: 'addition',
-    element: <AddLayout />,
+    path: 'products',
+    element: isLoggedIn ? (
+      <AddLayout />
+    ) : (
+      <Navigate to='/auth/login' state={{ referrer: location }} />
+    ),
     children: [
       { path: '', element: <AddProductPage /> },
       {
         path: 'edit',
         children: [
-          { path: '', element: <Navigate to='/addition' /> },
+          { path: '', element: <Navigate to='/products' /> },
           { path: ':productId', element: <EditProductPage /> }
         ]
       },
       { path: 'create', element: <CreateProductPage /> },
-      { path: '*', element: <Navigate to='/addition' /> }
+      { path: '*', element: <Navigate to='/products' /> }
     ]
   },
   {

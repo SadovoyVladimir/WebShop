@@ -1,12 +1,22 @@
 import React from 'react'
+import getRandomInt from '../../utils/getRandomInt'
 
-export default function ProductInfoCard({ images, id, description, category }) {
+export default function ProductInfoCard({
+  imagesInfo,
+  id,
+  description,
+  category
+}) {
   return (
     <>
       <div className='card mb-3'>
         <div className='row g-0'>
           <div className='col-md-4'>
-            <img src={images[0]} className='img-fluid rounded-start' alt='' />
+            <img
+              src={imagesInfo[getRandomInt(0, imagesInfo.length - 1)]}
+              className='img-fluid rounded-start'
+              alt=''
+            />
           </div>
           <div className='col-md-8'>
             <div className='card-body'>

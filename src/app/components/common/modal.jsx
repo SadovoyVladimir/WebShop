@@ -13,7 +13,7 @@ export default function Modal({
 }) {
   return (
     <div
-      className='modal fade'
+      className='modal fade mx-2'
       id={id}
       tabIndex='-1'
       data-bs-backdrop='static'

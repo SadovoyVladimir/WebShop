@@ -1,72 +1,49 @@
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { NavLink } from 'react-router-dom'
 import Table from '../common/table'
-import { removeProduct } from '../../store/productsSlice'
+import CountInfo from '../common/countInfo'
+import NameInfo from '../common/nameInfo'
+import CategoryInfo from '../common/categoryInfo'
+import ChangeTableButtons from './changeTableButtons'
+import { useSelector } from 'react-redux'
+import { getCurrentUserId } from '../../store/usersSlice'
+import UserInfo from '../common/userInfo'
 
 export default function ProductsTable({ products, onSort, selectedSort }) {
-  const dispatch = useDispatch()
-  const style = {
-    overflow: 'hidden',
-    whiteSpace: 'nowrap',
-    textOverflow: 'ellipsis'
-  }
-  const handleDelete = id => {
-    dispatch(removeProduct(id))
-  }
+  const userId = useSelector(getCurrentUserId())
+
   const columns = {
-    id: { path: 'id', name: 'ID', width: 7 },
+    count: {
+      name: '№',
+      width: 5,
+      component: (product, index) => <CountInfo count={index + 1} />
+    },
     name: {
       path: 'name',
-      name: 'Название',
-      width: 30,
-      component: product => (
-        <NavLink to={`/product/${product.id}`}>{product.name}</NavLink>
-      )
+      name: 'Наименование',
+      width: 25,
+      component: product => <NameInfo {...product} />
     },
     category: {
       name: 'Категория',
-      width: 20,
-      component: product => <p>{product.category}</p>
+      width: 25,
+      component: product => <CategoryInfo categoryId={product.category} />
     },
     price: {
       path: 'price',
-      name: 'Цена, $',
-      width: 13,
+      name: 'Цена, руб.',
+      width: 15,
       component: product => <p>{product.price}</p>
     },
-    // url: {
-    //   name: 'Адрес картинки',
-    //   width: 20,
-    //   component: product => <p style={style}>{product.imagesInfo[0]}</p>
-    // },
-    edit: {
-      name: 'Редакт.',
-      width: 5,
-      component: product => (
-        <div className='d-flex align-items-center justify-content-center'>
-          <NavLink to={`/addition/edit/${product.id}`}>
-            <i className='bi bi-pencil' style={{ fontSize: 25 + 'px' }}></i>
-          </NavLink>
-        </div>
-      )
+    creator: {
+      name: 'Создатель',
+      width: 15,
+      component: product => <UserInfo {...product} />
     },
-    delete: {
-      name: 'Удал.',
-      width: 5,
+    edit: {
+      name: 'Действия',
+      width: 15,
       component: product => (
-        <div className='d-flex align-items-center justify-content-center'>
-          <div
-            className=''
-            style={{ cursor: 'pointer' }}
-            onClick={() => handleDelete(product.id)}
-          >
-            <i
-              className='bi bi-x-square-fill'
-              style={{ fontSize: 25 + 'px', color: 'red' }}
-            ></i>
-          </div>
-        </div>
+        <ChangeTableButtons product={product} userId={userId} />
       )
     }
   }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
 import CartButton from './cartButton'
+import getRandomInt from '../../utils/getRandomInt'
 
 export default function ProductCard({
   name,
@@ -15,7 +16,7 @@ export default function ProductCard({
         <div className='col-md-2'>
           <NavLink to={`/product/${id}`}>
             <img
-              src={imagesInfo[0]}
+              src={imagesInfo[getRandomInt(0, imagesInfo.length - 1)]}
               className='img-fluid rounded-start'
               alt='no images'
             />

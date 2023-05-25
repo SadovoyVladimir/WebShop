@@ -1,16 +1,15 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
+import LoginForm from '../ui/loginForm'
 
 export default function LoginPage() {
   return (
-    <div>
-      <h2>Login Page</h2>
-      <form>
-        <input type='email' />
-      </form>
-      <NavLink to='/auth/signup'>
-        <span>Sign Up</span>
-      </NavLink>
-    </div>
+    <>
+      <h3 className='mb-4'>Login</h3>
+      <LoginForm />
+      <p>
+        Don't have an account? <NavLink to='/auth/signup'>Sign Up</NavLink>
+      </p>
+    </>
   )
 }

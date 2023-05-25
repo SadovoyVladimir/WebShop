@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import PreviewImage from '../previewImage'
 
 export default function LoadFileField({
@@ -16,7 +16,6 @@ export default function LoadFileField({
   const handleChange = ({ target }) => {
     const files = Array.from(target.files)
     if (!files.length) return onChange({ name: target.name, value: [] })
-
     const imageInfo = []
     files.forEach(file => {
       const reader = new FileReader()
@@ -38,6 +37,11 @@ export default function LoadFileField({
     inputRef.current.click()
   }
 
+  useEffect(() => {
+    const dt = new DataTransfer()
+    inputRef.current.files = dt.files
+  }, [value])
+
   return (
     <div className='mb-4'>
       <div className='input-group has-validation'>
@@ -54,6 +58,7 @@ export default function LoadFileField({
         <button
           className={`btn btn-${error ? 'danger' : 'primary'}`}
           onClick={handleClick}
+          type='button'
         >
           {error ? 'Выбрать' : 'Изменить'}
         </button>

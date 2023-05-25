@@ -2,6 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import AddSubButton from '../common/addSubButton'
 import cartLocalStorageService from '../../services/cartLocalStorage.service'
+import getRandomInt from '../../utils/getRandomInt'
 
 export default function CartProductCard({
   name,
@@ -31,7 +32,7 @@ export default function CartProductCard({
         <div className='col-md-2'>
           <NavLink to={`/product/${id}`}>
             <img
-              src={imagesInfo[0]}
+              src={imagesInfo[getRandomInt(0, imagesInfo.length - 1)]}
               className='img-fluid rounded-start'
               alt='no images'
             />

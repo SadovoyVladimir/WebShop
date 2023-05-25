@@ -1,6 +1,5 @@
 import React from 'react'
 import CategoriesList from '../ui/categoriesList'
-// import useMockData from '../../utils/mockData'
 import { useSelector } from 'react-redux'
 import { getCategories } from '../../store/categoriesSlice'
 

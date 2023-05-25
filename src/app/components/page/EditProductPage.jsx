@@ -3,11 +3,13 @@ import { useSelector } from 'react-redux'
 import { Navigate, useParams } from 'react-router-dom'
 import { getProductById } from '../../store/productsSlice'
 import CreateProductForm from '../ui/createProductForm'
+import { getCurrentUserId } from '../../store/usersSlice'
 
 export default function EditProductPage() {
   const { productId } = useParams()
   const product = useSelector(getProductById(productId))
-  if (!product) return <Navigate to='/addition' />
+  const userId = useSelector(getCurrentUserId())
+  if (!product || userId !== product.userId) return <Navigate to='/products' />
   return (
     <div className='row'>
       <div className='col-md-10 offset-md-1 shadow p-4'>
