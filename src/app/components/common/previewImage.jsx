@@ -1,12 +1,9 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export default function PreviewImage({ onDelete, value }) {
-  const handleDelete = i => {
-    onDelete(i)
-  }
-
   return (
-    <div className='d-flex flex-wrap p-2 preview'>
+    <div className='d-flex flex-wrap py-2 preview'>
       {value?.map((image, index) => (
         <div
           className='preview-image mb-2 me-2'
@@ -14,7 +11,7 @@ export default function PreviewImage({ onDelete, value }) {
           style={{ position: 'relative' }}
         >
           <div
-            onClick={() => handleDelete(index)}
+            onClick={() => onDelete(index)}
             className='d-flex align-items-center justify-content-center preview-remove'
           >
             &times;
@@ -28,4 +25,9 @@ export default function PreviewImage({ onDelete, value }) {
       ))}
     </div>
   )
+}
+
+PreviewImage.propTypes = {
+  onDelete: PropTypes.func.isRequired,
+  value: PropTypes.array
 }

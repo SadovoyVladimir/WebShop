@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export default function RadioField({ options, name, onChange, value, label }) {
   const handleChange = ({ target }) => {
@@ -34,4 +35,12 @@ export default function RadioField({ options, name, onChange, value, label }) {
       </div>
     </div>
   )
+}
+
+RadioField.propTypes = {
+  options: PropTypes.array.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
+  label: PropTypes.string.isRequired
 }

@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export default function CheckBoxField({
   name,
@@ -10,10 +11,10 @@ export default function CheckBoxField({
   const handleChange = () => {
     onChange({ name, value: !value })
   }
-
   const getInputClasses = () => {
     return 'form-check-input' + (error ? ' is-invalid' : '')
   }
+
   return (
     <div className='form-check mb-4'>
       <input
@@ -35,4 +36,15 @@ export default function CheckBoxField({
       {error && <div className='invalid-feedback'>{error}</div>}
     </div>
   )
+}
+
+CheckBoxField.propTypes = {
+  name: PropTypes.string.isRequired,
+  value: PropTypes.bool.isRequired,
+  onChange: PropTypes.func.isRequired,
+  error: PropTypes.string,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ])
 }

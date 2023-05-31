@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export default function Modal({
   id,
@@ -59,4 +60,16 @@ export default function Modal({
       </div>
     </div>
   )
+}
+
+Modal.propTypes = {
+  id: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  body: PropTypes.oneOfType([PropTypes.string, PropTypes.node]),
+  firstBtnText: PropTypes.string.isRequired,
+  secondBtnText: PropTypes.string.isRequired,
+  minWidth: PropTypes.string.isRequired,
+  onCancel: PropTypes.func.isRequired,
+  onSave: PropTypes.func.isRequired,
+  isValid: PropTypes.bool
 }

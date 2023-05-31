@@ -27,8 +27,9 @@ export default function TextAreaField({ label, value, name, onChange, error }) {
 }
 
 TextAreaField.propTypes = {
-  label: PropTypes.string,
-  value: PropTypes.string,
-  name: PropTypes.string,
-  onChange: PropTypes.func
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  error: PropTypes.string
 }

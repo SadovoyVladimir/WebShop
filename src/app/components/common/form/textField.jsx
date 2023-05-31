@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 
 export default function TextField({
   label,
@@ -47,4 +48,13 @@ export default function TextField({
       </div>
     </div>
   )
+}
+
+TextField.propTypes = {
+  label: PropTypes.string.isRequired,
+  type: PropTypes.string,
+  value: PropTypes.oneOfType([PropTypes.number, PropTypes.string]).isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  error: PropTypes.string
 }

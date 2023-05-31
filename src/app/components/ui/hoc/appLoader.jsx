@@ -1,5 +1,6 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import PropTypes from 'prop-types'
 import {
   getProductsLoadingStatus,
   loadProductsList
@@ -8,12 +9,12 @@ import {
   getCategoriesLoadingStatus,
   loadCategoriesList
 } from '../../../store/categoriesSlice'
-import SpinnerLoader from '../../common/SpinnerLoader'
 import {
   getIsLoggedIn,
   getUsersLoadingStatus,
   loadUsersList
 } from '../../../store/usersSlice'
+import SpinnerLoader from '../../common/SpinnerLoader'
 
 export default function AppLoader({ children }) {
   const dispatch = useDispatch()
@@ -35,4 +36,11 @@ export default function AppLoader({ children }) {
   if (isLoading) return <SpinnerLoader />
 
   return children
+}
+
+AppLoader.propTypes = {
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ])
 }

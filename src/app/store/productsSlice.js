@@ -129,7 +129,7 @@ export const getProductById = productId => state => {
 }
 export const getProductsByIds = productsIds => state => {
   if (state.products.entities) {
-    let products = []
+    const products = []
     productsIds?.forEach(id => {
       for (const prod of state.products.entities) {
         if (id === prod.id) {
@@ -143,7 +143,7 @@ export const getProductsByIds = productsIds => state => {
 }
 export const getProductsByCategoryId = categoryId => state => {
   if (state.products.entities) {
-    let products = []
+    const products = []
     for (const prod of state.products.entities) {
       if (prod.category === categoryId) {
         products.push(prod)

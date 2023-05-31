@@ -55,10 +55,11 @@ export default function SelectField({
 }
 
 SelectField.propTypes = {
-  label: PropTypes.string,
-  value: PropTypes.string,
-  onChange: PropTypes.func,
+  label: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
   defaultOption: PropTypes.string,
   options: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
-  name: PropTypes.string
+  name: PropTypes.string.isRequired,
+  error: PropTypes.string
 }

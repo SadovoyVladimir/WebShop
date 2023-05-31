@@ -1,4 +1,4 @@
-import { Navigate } from 'react-router-dom'
+import React, { Navigate } from 'react-router-dom'
 import CategoryLayout from './layouts/CategoryLayout'
 import ProductLayout from './layouts/ProductLayout'
 import AuthLayout from './layouts/AuthLayout'

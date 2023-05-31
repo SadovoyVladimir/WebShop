@@ -1,9 +1,9 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import ProductsList from '../ui/productsList'
 import { useSelector } from 'react-redux'
 import { getProductsByCategoryId } from '../../store/productsSlice'
 import { getCategoryById } from '../../store/categoriesSlice'
+import ProductsList from '../ui/productsList'
 
 export default function CategoryPage() {
   const { categoryId } = useParams()

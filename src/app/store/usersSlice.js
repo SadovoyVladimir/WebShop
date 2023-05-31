@@ -119,6 +119,10 @@ export const logOut = () => dispatch => {
   dispatch(userLoggedOut())
 }
 
+export const clearAuthError = () => dispatch => {
+  dispatch(authRequested())
+}
+
 function createUser(payload) {
   return async function (dispatch) {
     dispatch(userCreateRequested())

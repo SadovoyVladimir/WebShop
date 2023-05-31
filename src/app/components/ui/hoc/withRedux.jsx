@@ -1,5 +1,7 @@
-import { createStore } from '../../../store/createStore'
+import React from 'react'
 import { Provider } from 'react-redux'
+import { createStore } from '../../../store/createStore'
+
 const store = createStore()
 
 const withRedux =

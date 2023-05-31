@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
-import ProductCard from './productCard'
 import _ from 'lodash'
+import PropTypes from 'prop-types'
+import ProductCard from './productCard'
 
 export default function ProductsList({ products }) {
   const [sortBy, setSortBy] = useState({ path: 'price', order: 'asc' })
@@ -33,12 +34,12 @@ export default function ProductsList({ products }) {
   return (
     <>
       <p>
-        Sort by:{' '}
+        Сортировать по:{' '}
         <span
           {...{ role: sortBy.path && 'button' }}
           onClick={() => handleSort('price')}
         >
-          price
+          цене
           {renderSortArrow('price')}
         </span>
       </p>
@@ -47,4 +48,8 @@ export default function ProductsList({ products }) {
       ))}
     </>
   )
+}
+
+ProductsList.propTypes = {
+  products: PropTypes.arrayOf(PropTypes.object).isRequired
 }

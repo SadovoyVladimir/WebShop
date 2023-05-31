@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export default function AddSubButton({ text, subHandler, addHandler }) {
   return (
@@ -12,4 +13,10 @@ export default function AddSubButton({ text, subHandler, addHandler }) {
       </button>
     </div>
   )
+}
+
+AddSubButton.propTypes = {
+  text: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  subHandler: PropTypes.func.isRequired,
+  addHandler: PropTypes.func.isRequired
 }

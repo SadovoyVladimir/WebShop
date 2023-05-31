@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 export default function TableHeader({ onSort, selectedSort, columns }) {
   const handleSort = item => {
@@ -49,4 +50,10 @@ export default function TableHeader({ onSort, selectedSort, columns }) {
       </tr>
     </thead>
   )
+}
+
+TableHeader.propTypes = {
+  onSort: PropTypes.func.isRequired,
+  selectedSort: PropTypes.object.isRequired,
+  columns: PropTypes.object.isRequired
 }

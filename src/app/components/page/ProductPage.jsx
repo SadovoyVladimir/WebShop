@@ -2,8 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { getProductById } from '../../store/productsSlice'
-import ProductInfoCard from '../ui/productInfoCard'
-import CartAdditionCard from '../ui/cartAdditionCard'
+import ProductInfoCard from '../ui/productInfo/productInfoCard'
+import CartAdditionCard from '../ui/productInfo/cartAdditionCard'
 
 export default function ProductPage() {
   const { productId } = useParams()

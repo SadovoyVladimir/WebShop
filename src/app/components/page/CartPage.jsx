@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react'
-import CartList from '../ui/cartList'
-import cartLocalStorageService from '../../services/cartLocalStorage.service'
-import EmptyCartInfo from '../ui/emptyCartInfo'
-import CartInfo from '../ui/cartInfo'
-import ClearCartButton from '../ui/clearCartButton'
 import { useSelector } from 'react-redux'
 import { getProductsByIds } from '../../store/productsSlice'
+import cartLocalStorageService from '../../services/cartLocalStorage.service'
+import CartList from '../ui/cart/cartList'
+import EmptyCartInfo from '../ui/cart/emptyCartInfo'
+import CartInfo from '../ui/cart/cartInfo'
+import ClearCartButton from '../ui/cart/clearCartButton'
 
 export default function CartPage() {
   const localStorageCart = cartLocalStorageService.getCartInfo()
@@ -19,10 +19,13 @@ export default function CartPage() {
   )
 
   useEffect(() => {
-    const newArr = cartProducts.map(product => {
-      const findProduct = localStorageCart?.filter(p => p.id === product.id)
-      return { ...product, count: findProduct[0].count }
-    })
+    let newArr = []
+    if (cartProducts) {
+      newArr = cartProducts.map(product => {
+        const findProduct = localStorageCart?.filter(p => p.id === product.id)
+        return { ...product, count: findProduct[0].count }
+      })
+    }
     setCountCartProducts(newArr)
   }, [])
 

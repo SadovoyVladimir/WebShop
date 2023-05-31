@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react'
+import PropTypes from 'prop-types'
 import PreviewImage from '../previewImage'
 
 export default function LoadFileField({
@@ -10,7 +11,6 @@ export default function LoadFileField({
   isMultiple = true
 }) {
   const accept = ['.png', '.jpg', '.jpeg', '.gif']
-
   const inputRef = useRef(null)
 
   const handleChange = ({ target }) => {
@@ -27,9 +27,6 @@ export default function LoadFileField({
     })
   }
 
-  const handleDelete = i => {
-    onDelete(i)
-  }
   const getInputClasses = () => {
     return 'form-control' + (error ? ' is-invalid' : '')
   }
@@ -64,7 +61,16 @@ export default function LoadFileField({
         </button>
         {error && <div className='invalid-feedback'>{error}</div>}
       </div>
-      {value && <PreviewImage onDelete={handleDelete} value={value} />}
+      {value && <PreviewImage onDelete={onDelete} value={value} />}
     </div>
   )
+}
+
+LoadFileField.propTypes = {
+  value: PropTypes.array.isRequired,
+  name: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  error: PropTypes.string,
+  onDelete: PropTypes.func.isRequired,
+  isMultiple: PropTypes.bool
 }
