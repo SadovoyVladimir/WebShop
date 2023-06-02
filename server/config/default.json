@@ -1,6 +1,6 @@
 {
-	"port": 8080,
-	"mongoUri": "mongodb+srv://vlasadovoj:Test1234@clusterws.wkkog8k.mongodb.net/app?retryWrites=true&w=majority",
-	"accessSecret": "superSecretFromBackend",
-	"refreshSecret": "superRefreshKey"
+  "port": 8080,
+  "mongoUri": "mongodb+srv://vlasadovoj:Test1234@clusterws.wkkog8k.mongodb.net/app?retryWrites=true&w=majority",
+  "accessSecret": "superSecretFromBackend",
+  "refreshSecret": "superRefreshKey"
 }
