@@ -8,6 +8,8 @@ const router = express.Router({ mergeParams: true })
 router.post('/signUp', [
   check('email', 'Некорректный email').isEmail(),
   check('password', 'Минимальная длина пароля 8 символов').isLength({ min: 8 }),
+  check('name', 'Должно быть имя').exists(),
+  check('name', 'Минимальная длина имени 3 символа').isLength({ min: 3 }),
   async (req, res) => {
     try {
       const errors = validationResult(req)
