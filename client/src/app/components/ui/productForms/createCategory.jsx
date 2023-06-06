@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
-import { nanoid } from 'nanoid'
 import TextField from '../../common/form/textField'
 import PreviewImage from '../../common/previewImage'
 import AddImageModal from './addImageModal'
@@ -8,7 +7,6 @@ import { validator } from '../../../utils/validator'
 
 export default function CreateCategory({ value, onChange }) {
   const [data, setData] = useState({
-    id: nanoid(),
     name: value.name || '',
     imageInfo: []
   })

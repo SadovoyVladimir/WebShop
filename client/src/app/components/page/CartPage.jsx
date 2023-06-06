@@ -9,7 +9,7 @@ import ClearCartButton from '../ui/cart/clearCartButton'
 
 export default function CartPage() {
   const localStorageCart = cartLocalStorageService.getCartInfo()
-  const productsIds = localStorageCart?.map(p => p.id)
+  const productsIds = localStorageCart?.map(p => p._id)
   const cartProducts = useSelector(getProductsByIds(productsIds))
   const [countCartProducts, setCountCartProducts] = useState([])
   const totalCount = countCartProducts.reduce((acc, p) => acc + p.count, 0)
@@ -22,7 +22,7 @@ export default function CartPage() {
     let newArr = []
     if (cartProducts) {
       newArr = cartProducts.map(product => {
-        const findProduct = localStorageCart?.filter(p => p.id === product.id)
+        const findProduct = localStorageCart?.filter(p => p._id === product._id)
         return { ...product, count: findProduct[0].count }
       })
     }
@@ -31,7 +31,7 @@ export default function CartPage() {
 
   const addProduct = id => {
     setCountCartProducts(prevState => {
-      const index = prevState.findIndex(p => p.id === id)
+      const index = prevState.findIndex(p => p._id === id)
       prevState[index].count++
       return prevState
     })
@@ -39,17 +39,17 @@ export default function CartPage() {
 
   const subProduct = id => {
     setCountCartProducts(prevState => {
-      const index = prevState.findIndex(p => p.id === id)
+      const index = prevState.findIndex(p => p._id === id)
       prevState[index].count--
       if (prevState[index].count === 0) {
-        return prevState.filter(p => p.id !== id)
+        return prevState.filter(p => p._id !== id)
       }
       return prevState
     })
   }
 
   const deleteProduct = id => {
-    setCountCartProducts(prevState => prevState.filter(p => p.id !== id))
+    setCountCartProducts(prevState => prevState.filter(p => p._id !== id))
   }
 
   const clearCart = () => {

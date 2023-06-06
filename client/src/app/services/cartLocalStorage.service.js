@@ -11,30 +11,30 @@ function addProductsToStorage(products) {
   localStorage.setItem(CART_KEY, JSON.stringify(products))
 }
 
-function addProductIdToStorage(id) {
+function addProductIdToStorage(_id) {
   let allProducts = getCartInfo()
   if (!allProducts) allProducts = []
 
-  if (!allProducts.filter(p => p.id === id).length) {
-    allProducts.push({ id, count: 1 })
+  if (!allProducts.filter(p => p._id === _id).length) {
+    allProducts.push({ _id, count: 1 })
   } else {
-    allProducts.map(p => p.id === id && ++p.count)
+    allProducts.map(p => p._id === _id && ++p.count)
   }
 
   addProductsToStorage(allProducts)
 }
 
-function subProductFromStorage(id) {
+function subProductFromStorage(_id) {
   let allProducts = getCartInfo()
-  allProducts.map(p => p.id === id && --p.count)
+  allProducts.map(p => p._id === _id && --p.count)
   allProducts = allProducts.filter(p => p.count !== 0)
 
   addProductsToStorage(allProducts)
 }
 
-function deleteProductFromStorage(id) {
+function deleteProductFromStorage(_id) {
   let allProducts = getCartInfo()
-  allProducts = allProducts.filter(p => p.id !== id)
+  allProducts = allProducts.filter(p => p._id !== _id)
 
   addProductsToStorage(allProducts)
 }

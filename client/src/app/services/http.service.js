@@ -10,14 +10,14 @@ const httpService = axios.create({
 
 httpService.interceptors.request.use(
   async function (config) {
+    const expiresDate = localStorageService.getTokenExpiresDate()
+    const refreshToken = localStorageService.getRefreshToken()
+    const isExpired = refreshToken && expiresDate < Date.now()
     if (configFile.isFirebase) {
       const containSlash = /\/$/gi.test(config.url)
       config.url =
         (containSlash ? config.url.slice(0, -1) : config.url) + '.json'
-
-      const expiresDate = localStorageService.getTokenExpiresDate()
-      const refreshToken = localStorageService.getRefreshToken()
-      if (refreshToken && expiresDate < Date.now()) {
+      if (isExpired) {
         const data = await authService.refresh()
 
         localStorageService.setTokens({
@@ -30,6 +30,19 @@ httpService.interceptors.request.use(
       const accessToken = localStorageService.getAccessToken()
       if (accessToken) {
         config.params = { ...config.params, auth: accessToken }
+      }
+    } else {
+      if (isExpired) {
+        const data = await authService.refresh()
+
+        localStorageService.setTokens(data)
+      }
+      const accessToken = localStorageService.getAccessToken()
+      if (accessToken) {
+        config.headers = {
+          ...config.headers,
+          Authorization: `Bearer ${accessToken}`
+        }
       }
     }
     return config
@@ -52,6 +65,7 @@ httpService.interceptors.response.use(
     if (configFile.isFirebase) {
       res.data = { content: transformData(res.data) }
     }
+    res.data = { content: res.data }
     return res
   },
   function (error) {
@@ -59,7 +73,7 @@ httpService.interceptors.response.use(
       error.response?.status >= 400 && error.response.status < 500
 
     if (!expectedErrors) {
-      toast.error('Something was wrong. Try it later')
+      toast.error('Что-то пошло не так. Попробуйте позже')
     }
     return Promise.reject(error)
   }

@@ -9,30 +9,30 @@ export default function CartProductCard({
   name,
   price,
   imagesInfo,
-  id,
+  _id,
   count,
   addProduct,
   subProduct,
   deleteProduct
 }) {
   const subFromCart = () => {
-    cartLocalStorageService.subProductFromStorage(id)
-    subProduct(id)
+    cartLocalStorageService.subProductFromStorage(_id)
+    subProduct(_id)
   }
   const addToCart = () => {
-    cartLocalStorageService.addProductIdToStorage(id)
-    addProduct(id)
+    cartLocalStorageService.addProductIdToStorage(_id)
+    addProduct(_id)
   }
   const deleteFromCart = () => {
-    cartLocalStorageService.deleteProductFromStorage(id)
-    deleteProduct(id)
+    cartLocalStorageService.deleteProductFromStorage(_id)
+    deleteProduct(_id)
   }
 
   return (
     <div className='card mb-3 border-0' style={{ maxWidth: 100 + '%' }}>
       <div className='row g-0'>
         <div className='col-md-2'>
-          <NavLink to={`/product/${id}`}>
+          <NavLink to={`/product/${_id}`}>
             <img
               src={imagesInfo[getRandomInt(0, imagesInfo.length - 1)]}
               className='img-fluid rounded-start'
@@ -43,7 +43,7 @@ export default function CartProductCard({
         <div className='col-md-7'>
           <div className='card-body py-1 px-2'>
             <NavLink
-              to={`/product/${id}`}
+              to={`/product/${_id}`}
               className='text-decoration-none text-reset'
             >
               <h5 className='card-title'>{name}</h5>
@@ -76,7 +76,7 @@ CartProductCard.propTypes = {
   name: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
   imagesInfo: PropTypes.array.isRequired,
-  id: PropTypes.string.isRequired,
+  _id: PropTypes.string.isRequired,
   count: PropTypes.number.isRequired,
   addProduct: PropTypes.func.isRequired,
   subProduct: PropTypes.func.isRequired,

@@ -1,4 +1,4 @@
-import { createAction, createSlice } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 import userService from '../services/user.service'
 import authService from '../services/auth.service'
 import localStorageService from '../services/localStorage.service'
@@ -42,12 +42,6 @@ const usersSlice = createSlice({
     authRequestFailed: (state, action) => {
       state.error = action.payload
     },
-    userCreated: (state, action) => {
-      if (!Array.isArray(state.entities)) {
-        state.entities = []
-      }
-      state.entities.push(action.payload)
-    },
     userLoggedOut: state => {
       state.entities = null
       state.isLoggedIn = false
@@ -66,13 +60,9 @@ const {
   usersRequestFailed,
   authRequestSuccess,
   authRequestFailed,
-  userCreated,
   userLoggedOut,
   authRequested
 } = actions
-
-const userCreateRequested = createAction('users/userCreateRequested')
-const createUserFailed = createAction('users/createUserFailed')
 
 export const signIn =
   ({ payload }) =>
@@ -81,8 +71,8 @@ export const signIn =
     dispatch(authRequested())
     try {
       const data = await authService.login({ email, password })
-      dispatch(authRequestSuccess({ userId: data.localId }))
       localStorageService.setTokens(data)
+      dispatch(authRequestSuccess({ userId: data.userId }))
     } catch (error) {
       const { code, message } = error.response.data.error
       if (code === 400) {
@@ -94,25 +84,16 @@ export const signIn =
     }
   }
 
-export const signUp =
-  ({ email, password, ...rest }) =>
-  async dispatch => {
-    dispatch(authRequested())
-    try {
-      const data = await authService.register({ email, password })
-      localStorageService.setTokens(data)
-      dispatch(authRequestSuccess({ userId: data.localId }))
-      dispatch(
-        createUser({
-          id: data.localId,
-          email,
-          ...rest
-        })
-      )
-    } catch (error) {
-      dispatch(authRequestFailed(error.message))
-    }
+export const signUp = payload => async dispatch => {
+  dispatch(authRequested())
+  try {
+    const data = await authService.register(payload)
+    localStorageService.setTokens(data)
+    dispatch(authRequestSuccess({ userId: data.userId }))
+  } catch (error) {
+    dispatch(authRequestFailed(error.message))
   }
+}
 
 export const logOut = () => dispatch => {
   localStorageService.removeAuthData()
@@ -121,18 +102,6 @@ export const logOut = () => dispatch => {
 
 export const clearAuthError = () => dispatch => {
   dispatch(authRequested())
-}
-
-function createUser(payload) {
-  return async function (dispatch) {
-    dispatch(userCreateRequested())
-    try {
-      await userService.create(payload)
-      dispatch(userCreated(payload))
-    } catch (error) {
-      dispatch(createUserFailed(error.message))
-    }
-  }
 }
 
 export const loadUsersList = () => async dispatch => {
@@ -153,7 +122,7 @@ export const getUserById = userId => state => {
   if (state.users.entities) {
     let findUser = {}
     for (const user of state.users.entities) {
-      if (user.id === userId) {
+      if (user._id === userId) {
         findUser = user
         break
       }

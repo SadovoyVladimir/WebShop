@@ -7,7 +7,7 @@ import AddToCartButton from './addToCartButton'
 export default function CartButton({ id }) {
   const cartProducts = cartLocalStorageService.getCartInfo()
   const [quantity, setQuantity] = useState(
-    cartProducts?.filter(p => p.id === id)[0]?.count
+    cartProducts?.filter(p => p._id === id)[0]?.count
   )
 
   const handleAdd = () => {

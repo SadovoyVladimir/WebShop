@@ -2,13 +2,13 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import CartButton from '../addToCartButton/cartButton'
 
-export default function CartAdditionCard({ price, id }) {
+export default function CartAdditionCard({ price, _id }) {
   return (
     <>
       <div className='card border-light'>
         <div className='card-body'>
           <h5 className='card-title'>Цена: {price} руб.</h5>
-          <CartButton id={id} />
+          <CartButton id={_id} />
         </div>
       </div>
     </>
@@ -17,5 +17,5 @@ export default function CartAdditionCard({ price, id }) {
 
 CartAdditionCard.propTypes = {
   price: PropTypes.number.isRequired,
-  id: PropTypes.string.isRequired
+  _id: PropTypes.string.isRequired
 }

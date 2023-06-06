@@ -2,7 +2,7 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-export default function CategoryCard({ image, name, id }) {
+export default function CategoryCard({ image, name, _id }) {
   return (
     <div className='col'>
       <div className='card h-100'>
@@ -16,7 +16,7 @@ export default function CategoryCard({ image, name, id }) {
           <h5 className='card-title'>{name}</h5>
         </div>
         <div className='card-footer footer d-flex justify-content-center'>
-          <NavLink to={`/category/${id}`} className='btn btn-primary'>
+          <NavLink to={`/category/${_id}`} className='btn btn-primary'>
             Перейти
           </NavLink>
         </div>
@@ -26,7 +26,7 @@ export default function CategoryCard({ image, name, id }) {
 }
 
 CategoryCard.propTypes = {
-  image: PropTypes.string.isRequired,
+  image: PropTypes.string,
   name: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired
+  _id: PropTypes.string.isRequired
 }

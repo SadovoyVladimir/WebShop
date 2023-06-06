@@ -8,10 +8,7 @@ const categoriesService = {
     return data
   },
   create: async payload => {
-    const { data } = await httpService.put(
-      categoryEndpoint + payload.id,
-      payload
-    )
+    const { data } = await httpService.post(categoryEndpoint, payload)
     return data
   }
 }

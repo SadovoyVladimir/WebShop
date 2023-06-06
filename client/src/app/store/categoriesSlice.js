@@ -69,8 +69,9 @@ export const createCategory = payload => {
   return async function (dispatch) {
     dispatch(categoryCreateRequested())
     try {
-      await categoriesService.create(payload)
-      dispatch(categoryCreated(payload))
+      const { content } = await categoriesService.create(payload)
+      dispatch(categoryCreated({ ...payload, _id: content._id }))
+      return content._id
     } catch (error) {
       dispatch(createCategoryFailed(error.message))
     }
@@ -84,7 +85,7 @@ export const getCategoryById = categoryId => state => {
   if (state.categories.entities) {
     let category = {}
     for (const cat of state.categories.entities) {
-      if (cat.id === categoryId) {
+      if (cat._id === categoryId) {
         category = cat
         break
       }

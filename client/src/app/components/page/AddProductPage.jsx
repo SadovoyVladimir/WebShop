@@ -24,7 +24,7 @@ export default function AddProductPage() {
     setSortBy(item)
   }
 
-  if (products) {
+  if (products.length) {
     const count = products.length
     if (currentPage > Math.ceil(count / pageSize) && currentPage !== 1) {
       setCurrentPage(prevState => --prevState)

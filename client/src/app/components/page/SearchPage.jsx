@@ -15,7 +15,7 @@ export default function SearchPage() {
   const isLoading = useSelector(getProductsLoadingStatus())
 
   if (isLoading) return 'Loading...'
-  if (!productsList) {
+  if (!productsList.length) {
     toast.error('В магазине пока нет ни одного товара!')
     return <Navigate to='/' />
   }

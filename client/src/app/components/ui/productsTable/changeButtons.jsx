@@ -15,7 +15,7 @@ export default function ChangeButtons({ data, isEdit = false }) {
   return (
     <div className='d-flex align-items-center'>
       <div className='d-flex align-items-center justify-content-center pe-3'>
-        <NavLink to={`/products/edit/${data.id}`}>
+        <NavLink to={`/products/edit/${data._id}`}>
           <i className='bi bi-pencil' style={{ fontSize: 25 + 'px' }}></i>
         </NavLink>
       </div>
@@ -23,7 +23,7 @@ export default function ChangeButtons({ data, isEdit = false }) {
         <div
           className=''
           style={{ cursor: 'pointer' }}
-          onClick={() => handleDelete(data.id)}
+          onClick={() => handleDelete(data._id)}
         >
           <i
             className='bi bi-x-square-fill'

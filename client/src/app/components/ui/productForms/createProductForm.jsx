@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
-import { nanoid } from 'nanoid'
 import { createProduct, updateProduct } from '../../../store/productsSlice'
 import { getCurrentUserId } from '../../../store/usersSlice'
 import {
@@ -22,7 +21,6 @@ export default function CreateProductForm({ product }) {
   const userId = useSelector(getCurrentUserId())
   const categories = useSelector(getCategories())
   let initialData = {
-    id: nanoid(),
     name: '',
     description: '',
     price: '',
@@ -30,16 +28,19 @@ export default function CreateProductForm({ product }) {
     imagesInfo: []
   }
   const category = useSelector(getCategoryById(product?.category))
+  if (!categories.length) {
+    initialData.category = { name: '' }
+  }
   if (product) {
     initialData = { ...product }
     initialData.category = category.name
   }
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const [isCreateCategory, setCreateCategory] = useState(!categories)
+  const [isCreateCategory, setCreateCategory] = useState(!categories.length)
   const [data, setData] = useState(initialData)
   const [errors, setErrors] = useState({})
-  const newCategory = { id: nanoid(), name: data.category, imageInfo: [] }
+  const newCategory = { name: data.category, imageInfo: [] }
 
   const handleChange = target => {
     setData(prevState => ({ ...prevState, [target.name]: target.value }))
@@ -113,32 +114,31 @@ export default function CreateProductForm({ product }) {
 
   const isValid = !Object.keys(errors).length
 
-  const handleSubmit = e => {
+  const handleSubmit = async e => {
     e.preventDefault()
     const isValid = validate()
     if (!isValid) return
     const categoriesNames = categories?.map(category => category.name)
     const newData = { ...data, userId, price: +data.price }
     if (data.category.name) {
-      if (!categories || !categoriesNames.includes(data.category.name)) {
+      if (!categories.length || !categoriesNames.includes(data.category.name)) {
         const newCategory = {
-          id: data.category.id,
           name: data.category.name,
           image: Array.from(data.category.imageInfo)[0]
         }
-        newData.category = newCategory.id
-        dispatch(createCategory(newCategory))
+        const categoryId = await dispatch(createCategory(newCategory))
+        newData.category = categoryId
       } else {
         const findCategory = categories.find(
           cat => cat.name === data.category.name
         )
-        newData.category = findCategory.id
+        newData.category = findCategory._id
       }
     } else {
       const catIndex = categoriesNames.findIndex(
         catName => catName === data.category
       )
-      newData.category = categories[catIndex].id
+      newData.category = categories[catIndex]._id
     }
     if (product) {
       dispatch(updateProduct(newData)).then(() => navigate('/products'))
@@ -174,7 +174,7 @@ export default function CreateProductForm({ product }) {
       <div className='mb-3'>
         <div className='d-flex justify-content-between'>
           <h3 className='me-3'>Категория</h3>
-          {categories && (
+          {!!categories.length && (
             <button
               type='button'
               className='btn btn-primary'
@@ -184,7 +184,7 @@ export default function CreateProductForm({ product }) {
             </button>
           )}
         </div>
-        {!isCreateCategory && categories ? (
+        {!isCreateCategory && categories.length ? (
           <SelectField
             label='Выберите категорию'
             defaultOption={data.category ? null : 'Choose...'}
@@ -199,7 +199,7 @@ export default function CreateProductForm({ product }) {
         )}
       </div>
       <div>
-        <h3 className='me-3 mb-3'>Добавить картинку(и) товара(ов)</h3>
+        <h3 className='me-3 mb-3'>Добавить картинку(и) товара</h3>
         {!!data.imagesInfo.length && (
           <PreviewImage onDelete={deleteImageInfo} value={data.imagesInfo} />
         )}

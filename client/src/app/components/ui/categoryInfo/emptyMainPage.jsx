@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { getIsLoggedIn } from '../../../store/usersSlice'
 
-export default function EmptyCategoryInfo() {
+export default function EmptyMainPage() {
   const isLoggedIn = useSelector(getIsLoggedIn())
 
   return (

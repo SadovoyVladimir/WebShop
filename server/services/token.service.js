@@ -22,21 +22,21 @@ class TokenService {
     return token
   }
 
-	validateRefresh(refreshToken) {
-		try {
-			return jwt.verify(refreshToken, config.get('refreshSecret'))
-		} catch (e) {
-			return null
-		}
-	}
+  validateRefresh(refreshToken) {
+    try {
+      return jwt.verify(refreshToken, config.get('refreshSecret'))
+    } catch (e) {
+      return null
+    }
+  }
 
   validateAccess(accessToken) {
-		try {
-			return jwt.verify(accessToken, config.get('accessSecret'))
-		} catch (e) {
-			return null
-		}
-	}
+    try {
+      return jwt.verify(accessToken, config.get('accessSecret'))
+    } catch (e) {
+      return null
+    }
+  }
 
   async findToken(refreshToken) {
     try {

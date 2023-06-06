@@ -6,7 +6,7 @@ export default function CartList({ products, functions }) {
   return (
     <>
       {products.map(product => (
-        <CartProductCard key={product.id} {...product} {...functions} />
+        <CartProductCard key={product._id} {...product} {...functions} />
       ))}
     </>
   )

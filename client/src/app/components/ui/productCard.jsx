@@ -11,7 +11,7 @@ export default function ProductCard({
   price,
   imagesInfo,
   description,
-  id,
+  _id,
   userId
 }) {
   const { name: userName } = useSelector(getUserById(userId))
@@ -20,7 +20,7 @@ export default function ProductCard({
     <div className='card mb-3' style={{ maxWidth: 100 + '%' }}>
       <div className='row g-0'>
         <div className='col-md-2'>
-          <NavLink to={`/product/${id}`}>
+          <NavLink to={`/product/${_id}`}>
             <img
               src={imagesInfo[getRandomInt(0, imagesInfo.length - 1)]}
               className='img-fluid rounded-start'
@@ -32,7 +32,7 @@ export default function ProductCard({
         <div className='col-md-7'>
           <div className='card-body'>
             <NavLink
-              to={`/product/${id}`}
+              to={`/product/${_id}`}
               className='text-decoration-none text-reset'
             >
               <h5 className='card-title'>{name}</h5>
@@ -45,7 +45,7 @@ export default function ProductCard({
         </div>
         <div className='col-md-3 d-flex flex-column align-self-center pb-3 ps-3 pe-1'>
           <p className='card-text mt-2'>Цена за 1: {price} руб.</p>
-          <CartButton id={id} />
+          <CartButton id={_id} />
         </div>
       </div>
     </div>
@@ -57,6 +57,6 @@ ProductCard.propTypes = {
   price: PropTypes.number.isRequired,
   imagesInfo: PropTypes.array.isRequired,
   description: PropTypes.string.isRequired,
-  id: PropTypes.string.isRequired,
+  _id: PropTypes.string.isRequired,
   userId: PropTypes.string.isRequired
 }

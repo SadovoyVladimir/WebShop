@@ -4,6 +4,7 @@ import { useSelector } from 'react-redux'
 import { getProductsByCategoryId } from '../../store/productsSlice'
 import { getCategoryById } from '../../store/categoriesSlice'
 import ProductsList from '../ui/productsList'
+import EmptyCategoryPage from '../ui/emptyCategoryPage'
 
 export default function CategoryPage() {
   const { categoryId } = useParams()
@@ -13,7 +14,11 @@ export default function CategoryPage() {
   return (
     <div>
       <h2 className='text-center'>{category.name}</h2>
-      <ProductsList products={productsList} />
+      {productsList?.length ? (
+        <ProductsList products={productsList} />
+      ) : (
+        <EmptyCategoryPage />
+      )}
     </div>
   )
 }

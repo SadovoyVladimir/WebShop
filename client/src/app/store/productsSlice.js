@@ -29,11 +29,11 @@ const productsSlice = createSlice({
       state.entities.push(action.payload)
     },
     productUpdated: (state, action) => {
-      const index = state.entities.findIndex(u => u.id === action.payload.id)
+      const index = state.entities.findIndex(u => u._id === action.payload._id)
       state.entities[index] = { ...state.entities[index], ...action.payload }
     },
     productRemoved: (state, action) => {
-      state.entities = state.entities.filter(c => c.id !== action.payload)
+      state.entities = state.entities.filter(c => c._id !== action.payload)
     }
   }
 })
@@ -80,8 +80,8 @@ export const createProduct = payload => {
   return async function (dispatch) {
     dispatch(productCreateRequested())
     try {
-      await productsService.create(payload)
-      dispatch(productCreated(payload))
+      const { content } = await productsService.create(payload)
+      dispatch(productCreated({ ...payload, _id: content._id }))
     } catch (error) {
       dispatch(createProductFailed(error.message))
     }
@@ -92,8 +92,8 @@ export const updateProduct = payload => {
   return async function (dispatch) {
     dispatch(productUpdateRequested())
     try {
-      await productsService.update(payload)
-      dispatch(productUpdated(payload))
+      const { content } = await productsService.update(payload)
+      dispatch(productUpdated({ ...payload, _id: content._id }))
     } catch (error) {
       dispatch(updateProductFailed())
     }
@@ -104,7 +104,7 @@ export const removeProduct = productId => async dispatch => {
   dispatch(productRemoveRequested())
   try {
     const { content } = await productsService.removeProduct(productId)
-    if (content === null) {
+    if (!content) {
       dispatch(productRemoved(productId))
     }
   } catch (error) {
@@ -118,7 +118,7 @@ export const getProductById = productId => state => {
   if (state.products.entities) {
     let product
     for (const prod of state.products.entities) {
-      if (prod.id === productId) {
+      if (prod._id === productId) {
         product = prod
         break
       }
@@ -130,9 +130,9 @@ export const getProductById = productId => state => {
 export const getProductsByIds = productsIds => state => {
   if (state.products.entities) {
     const products = []
-    productsIds?.forEach(id => {
+    productsIds?.forEach(_id => {
       for (const prod of state.products.entities) {
-        if (id === prod.id) {
+        if (_id === prod._id) {
           products.push(prod)
           break
         }

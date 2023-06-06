@@ -8,7 +8,7 @@ export default function CategoriesList({ categories }) {
   return (
     <div className='row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4'>
       {filteredCategories.map(category => (
-        <CategoryCard {...category} key={category.id} />
+        <CategoryCard {...category} key={category._id} />
       ))}
     </div>
   )

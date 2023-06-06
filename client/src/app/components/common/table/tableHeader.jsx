@@ -6,10 +6,10 @@ export default function TableHeader({ onSort, selectedSort, columns }) {
     if (selectedSort.path === item) {
       onSort({
         ...selectedSort,
-        order: selectedSort.order === 'asc' ? 'desc' : 'asc'
+        order: selectedSort.order === 'desc' ? 'asc' : 'desc'
       })
     } else {
-      onSort({ path: item, order: 'asc' })
+      onSort({ path: item, order: 'desc' })
     }
   }
   const renderSortArrow = (path, currentPath) => {

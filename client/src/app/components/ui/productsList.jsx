@@ -4,17 +4,17 @@ import PropTypes from 'prop-types'
 import ProductCard from './productCard'
 
 export default function ProductsList({ products }) {
-  const [sortBy, setSortBy] = useState({ path: 'price', order: 'asc' })
+  const [sortBy, setSortBy] = useState({ path: 'price', order: 'desc' })
   const sortedProducts = _.orderBy(products, [sortBy.path], [sortBy.order])
 
   const handleSort = item => {
     if (sortBy.path === item) {
       setSortBy({
         ...sortBy,
-        order: sortBy.order === 'asc' ? 'desc' : 'asc'
+        order: sortBy.order === 'desc' ? 'asc' : 'desc'
       })
     } else {
-      setSortBy({ path: item, order: 'asc' })
+      setSortBy({ path: item, order: 'desc' })
     }
   }
 
@@ -44,7 +44,7 @@ export default function ProductsList({ products }) {
         </span>
       </p>
       {sortedProducts.map(p => (
-        <ProductCard key={p.id} {...p} />
+        <ProductCard key={p._id} {...p} />
       ))}
     </>
   )

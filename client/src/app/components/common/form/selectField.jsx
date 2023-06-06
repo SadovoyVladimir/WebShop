@@ -42,8 +42,8 @@ export default function SelectField({
         {optionsArray.length > 0 &&
           optionsArray.map(
             option =>
-              option.id && (
-                <option key={option.id} value={option.name}>
+              option._id && (
+                <option key={option._id} value={option.name}>
                   {option.name}
                 </option>
               )
