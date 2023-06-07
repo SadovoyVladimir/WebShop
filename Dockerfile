@@ -4,6 +4,8 @@ WORKDIR /app/client
 
 COPY client/package.json /app/client
 
+RUN npm install -g npm@9.6.7
+
 RUN npm install
 
 COPY client /app/client
