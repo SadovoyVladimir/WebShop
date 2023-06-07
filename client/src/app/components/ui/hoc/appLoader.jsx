@@ -21,6 +21,7 @@ export default function AppLoader({ children }) {
   const isLoadProducts = useSelector(getProductsLoadingStatus())
   const isLoadCategories = useSelector(getCategoriesLoadingStatus())
   const isLoadUsers = useSelector(getUsersLoadingStatus())
+
   const isLoggedIn = useSelector(getIsLoggedIn())
 
   const isLoading = isLoadCategories || isLoadProducts || isLoadUsers
@@ -28,9 +29,7 @@ export default function AppLoader({ children }) {
   useEffect(() => {
     dispatch(loadProductsList())
     dispatch(loadCategoriesList())
-    if (isLoggedIn) {
-      dispatch(loadUsersList())
-    }
+    dispatch(loadUsersList())
   }, [dispatch, isLoggedIn])
 
   if (isLoading) return <SpinnerLoader />

@@ -47,6 +47,12 @@ const usersSlice = createSlice({
       state.isLoggedIn = false
       state.auth = null
     },
+    userCreated: (state, action) => {
+      if (!Array.isArray(state.entities)) {
+        state.entities = []
+      }
+      state.entities.push(action.payload)
+    },
     authRequested: state => {
       state.error = null
     }
@@ -61,6 +67,7 @@ const {
   authRequestSuccess,
   authRequestFailed,
   userLoggedOut,
+  userCreated,
   authRequested
 } = actions
 
@@ -90,6 +97,7 @@ export const signUp = payload => async dispatch => {
     const data = await authService.register(payload)
     localStorageService.setTokens(data)
     dispatch(authRequestSuccess({ userId: data.userId }))
+    dispatch(userCreated(payload))
   } catch (error) {
     dispatch(authRequestFailed(error.message))
   }
